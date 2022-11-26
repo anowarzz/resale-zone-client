@@ -23,7 +23,7 @@ const HeroSection = () => {
 			 <Lottie
               animationData={cart}
               loop={true}
-              className="w-32 lg:w-48 border"
+              className="w-32"
             />
 			 </div>
 			</div>
