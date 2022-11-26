@@ -6,12 +6,12 @@ const HeroSection = () => {
   return (
     <div>
       <section>
-          <div className="bg-cyan-600">
+          <div className="bg-gray-800">
             <div className="container flex flex-col items-center px-4 py-16 pb-24 mx-auto text-center lg:pb-56 md:py-32 md:px-10 lg:px-32 text-gray-900">
             <div className="flex flex-col justify-center items-center lg:flex-row">
 			<div>
 			 <h1 className="text-2xl font-bold leading-none sm:text-6xl xl:max-w-3xl text-white">
-                Buy or sell your laptops easily
+                <span className="text-yellow-500">Buy or Sell</span> your used <span className="text-blue-400">laptops</span> easily ! 
               </h1>
               <p className="mt-6 mb-8 text-lg sm:mb-12 xl:max-w-3xl text-white">
                 Here you can Buy your desired pre-owned laptops at your{" "}
@@ -19,28 +19,15 @@ const HeroSection = () => {
                 used laptop easily with just few st
               </p>
 			 </div>
-			 <div>
+			
+			</div>
+      <div>
 			 <Lottie
               animationData={cart}
               loop={true}
               className="w-32 hidden sm:block h-32"
             />
 			 </div>
-			</div>
-              <div className="flex flex-wrap justify-center">
-                <button
-                  type="button"
-                  className="px-8 py-3 m-2 text-lg font-semibold rounded bg-gray-100 text-gray-900"
-                >
-                  Get started
-                </button>
-                <button
-                  type="button"
-                  className="px-8 py-3 m-2 text-lg border rounded border-gray-300 text-white"
-                >
-                  Learn more
-                </button>
-              </div>
             </div>
 			
           
