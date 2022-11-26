@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
-
+import logo from '../../assets/cart-logo2.jpg'
 
 const Navbar = () => {
 
@@ -21,13 +21,13 @@ const Navbar = () => {
         <Link to="/blog">Blog</Link>
       </li>
 
-          <li>
-            <button>SignOut</button>
-          </li>
-  
         <li>
           <Link to="/login">Login</Link>
         </li>
+
+        <li>
+            <button>Log Out</button>
+          </li>
   
     </React.Fragment>
 
@@ -59,8 +59,9 @@ const Navbar = () => {
             {menuItems}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost normal-case text-2xl md:text-3xl">
-         Resale Mart
+        <Link to="/" className="btn btn-ghost hover:bg-white  normal-case text-2xl md:text-3xl">
+        <img src={logo} className="w-16" alt="" />
+        <p className="mx-1 md:mx-3">Resale Mart</p>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

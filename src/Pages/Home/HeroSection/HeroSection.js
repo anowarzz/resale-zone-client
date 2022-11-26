@@ -23,7 +23,7 @@ const HeroSection = () => {
 			 <Lottie
               animationData={cart}
               loop={true}
-              className="w-32"
+              className="w-32 hidden sm:block h-32"
             />
 			 </div>
 			</div>
