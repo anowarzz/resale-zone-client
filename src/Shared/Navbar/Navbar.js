@@ -1,48 +1,39 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../contexts/AuthProvider";
+import { AuthContext } from "../../contexts/AuthProvider";
+
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
 
-  const handleLogOut = () => {
-    logOut()
-      .then(() => {})
-      .catch((err) => console.log(err));
-  };
 
-  const menuItems = (
+//   const handleLogOut = () => {
+//     logOut()
+//       .then(() => {})
+//       .catch((err) => console.log(err));
+//   };
+
+  const menuItems = 
     <React.Fragment>
       <li className="">
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="/appointment">Appointment</Link>
-      </li>
-      <li>
-        <Link to="/about">About</Link>
+        <Link to="/blog">Blog</Link>
       </li>
 
-      {user?.uid ? (
-        <>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <button>SignOut</button>
           </li>
-
-          <li>
-            <button onClick={handleLogOut}>SignOut</button>
-          </li>
-        </>
-      ) : (
+  
         <li>
           <Link to="/login">Login</Link>
         </li>
-      )}
+  
     </React.Fragment>
-  );
+
 
   return (
-    <div className="navbar  py-6 px-4 bg-base-100 font-Ibm-plex flex justify-between">
+    <div className="navbar  py-6 px-4 bg-base-100 flex justify-between">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -69,7 +60,7 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost normal-case text-2xl md:text-3xl">
-          Smile Clinic
+         Resale Mart
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
