@@ -15,11 +15,13 @@ const Register = () => {
  const { register,handleSubmit,formState: { errors },} = useForm();
 const { createUser, updateUser, googleLogIn } = useContext(AuthContext);
 
+const [createdUserEmail, setCreatedUserEmail] = useState('')
 const [signUpError, setSignUpError] = useState("");
+
 
 const navigate = useNavigate ();
 
-// Creating a new user using email and password
+// Register a  new user using email and password
 const handleRegister = (data, e) => {
     setSignUpError("");
 
@@ -29,8 +31,10 @@ const handleRegister = (data, e) => {
         console.log(user);
         toast.success("SignUp Successful");
         e.target.reset();
+        navigate('/')
         const userInfo = {
           displayName: data.name,
+          email: data.email
         };
         updateUser(userInfo)
           .then(() => {
@@ -46,7 +50,7 @@ const handleRegister = (data, e) => {
   };
 
 
-  // SignUp user using google
+  // Register user using google
   const handleGoogleSignUp = () => {
     googleLogIn(googleProvider)
       .then((result) => {
@@ -58,6 +62,25 @@ const handleRegister = (data, e) => {
       .catch((err) => {
         console.log(err);
         setSignUpError(err);
+      });
+  };
+
+
+// Adding user info into database
+
+const saveUser = (name, email) => {
+    const user = { name, email };
+
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then(res => res.json())
+      .then( data => {
+      setCreatedUserEmail(email)
       });
   };
 
