@@ -1,18 +1,20 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
-import logo from '../../assets/cart-logo2.jpg'
+import logo from "../../assets/cart-logo2.jpg";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
 
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        console.log("user log out done");
+      })
+      .catch((err) => console.log(err));
+  };
 
-//   const handleLogOut = () => {
-//     logOut()
-//       .then(() => {})
-//       .catch((err) => console.log(err));
-//   };
-
-  const menuItems = 
+  const menuItems = (
     <React.Fragment>
       <li className="">
         <Link to="/">Home</Link>
@@ -21,16 +23,23 @@ const Navbar = () => {
         <Link to="/blog">Blog</Link>
       </li>
 
+      {user?.uid ? (
         <li>
-          <Link to="/login">Login</Link>
+          <button onClick={handleLogOut}>Log Out</button>
         </li>
-
-        <li>
-            <button>Log Out</button>
+      ) : (
+        <>
+          <li>
+            <Link to="/login">Login</Link>
           </li>
-  
-    </React.Fragment>
 
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
+        </>
+      )}
+    </React.Fragment>
+  );
 
   return (
     <div className="navbar  py-6 px-4 bg-base-100 flex justify-between">
@@ -59,9 +68,12 @@ const Navbar = () => {
             {menuItems}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost hover:bg-white  normal-case text-2xl md:text-3xl">
-        <img src={logo} className="w-16" alt="" />
-        <p className="mx-1 md:mx-3">Resale Mart</p>
+        <Link
+          to="/"
+          className="btn btn-ghost hover:bg-white  normal-case text-2xl md:text-3xl"
+        >
+          <img src={logo} className="w-16" alt="" />
+          <p className="mx-1 md:mx-3">Resale Mart</p>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
