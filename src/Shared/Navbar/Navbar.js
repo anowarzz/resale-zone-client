@@ -122,7 +122,7 @@ const Navbar = () => {
           className="btn btn-ghost hover:bg-white  normal-case text-2xl md:text-3xl"
         >
           <img src={logo} className="w-16" alt="" />
-          <p className="mx-1 md:mx-3">Resale Mart</p>
+          <p className="mx-1 md:mx-3">Resale Zone</p>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
