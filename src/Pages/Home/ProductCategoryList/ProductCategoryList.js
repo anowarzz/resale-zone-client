@@ -1,7 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import CategoryCard from './CategoryCard';
 
 const ProductCategoryList = () => {

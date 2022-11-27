@@ -34,15 +34,15 @@ const router = createBrowserRouter([
         element: <Blog />
       },
       {
-        path: '/products',
+        path: '/category/:id',
         element: <PrivateRoute> <Products /> </PrivateRoute>,
-        loader: () => fetch('http://localhost:5000/products')
+        loader: ({params}) => fetch(`http://localhost:5000/categoryProducts?id=${params.id}`)
       },
       // {
-      //   path: '/category/:id',
+      //   path: 'products/categoryId/:id',
       //   element: <Products />,
       //   loader: ({params}) => {
-      //     return fetch(`http://localhost:5000/products/${params.id}`)
+      //     return fetch(`http://localhost:5000/products?categoryId=${params.id}`)
       //   }
       // }
     ],

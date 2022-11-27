@@ -99,11 +99,11 @@ const [loginError, setLoginError] = useState("");
               <input
                 {...register("password", {
                   required: "Password is required",
-                  pattern: {
-                    value: /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
-                    message:
-                      "Password must have uppercase, number and special character",
-                  },
+                  // pattern: {
+                  //   value: /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
+                  //   message:
+                  //     "Password must have uppercase, number and special character",
+                  // },
                   minLength: {
                     value: 6,
                     message: "Password must be 6 character long",

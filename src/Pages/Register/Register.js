@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import useToken from "../../Hooks/useToken";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -20,8 +21,13 @@ const Register = () => {
   const imageHostKey = process.env.REACT_APP_imgbb_key;
   const [userImage , setUserImage] = useState('');
   
-  const navigate = useNavigate();
+  const [token] =  useToken(createdUserEmail)
 
+  const navigate = useNavigate();
+  
+  if(token){
+    navigate('/')
+  }
   // Register a  new user using email and password
   const handleRegister = (data, e) => {
     setSignUpError("");
@@ -55,7 +61,7 @@ fetch(url, {
       
       toast.success("SignUp Successful");
       e.target.reset();
-      navigate("/");
+  
     
 
       const userInfo = {
@@ -67,6 +73,7 @@ fetch(url, {
         .then(() => {
           console.log(data);
           saveUserToDB(data.name, data.email, data.userType, userImage)
+          setCreatedUserEmail(data.email)
         })
         .catch((err) => {
           console.log(err);
@@ -176,9 +183,7 @@ fetch(url, {
             <span className="label-text">Photo</span>
           </label>
           <input
-            {...register("image", {
-              required: "Please upload a photo",
-            })}
+            {...register("image", {})}
             type="file"
             className="input input-bordered w-full"
             placeholder="Upload a photo"
