@@ -33,12 +33,17 @@ const router = createBrowserRouter([
         element: <Blog />
       },
       {
-        path: '/category/:id',
+        path: '/products',
         element: <Products />,
-        loader: ({params}) => {
-          return fetch(`http://localhost:5000/products/${params.id}`)
-        }
-      }
+        loader: () => fetch('http://localhost:5000/products')
+      },
+      // {
+      //   path: '/category/:id',
+      //   element: <Products />,
+      //   loader: ({params}) => {
+      //     return fetch(`http://localhost:5000/products/${params.id}`)
+      //   }
+      // }
     ],
   },
   {

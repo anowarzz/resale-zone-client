@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const CategoryCard = ({category}) => {
     return (
-       <Link className='hover:bg-gray-200' to={`/category/${category?.categoryId}`}>
+       <Link className='hover:bg-gray-200' to={`/products`}>
         <div className="flex flex-col justify-between p-5 border rounded shadow-sm">
         <div>
           <div className="flex items-center justify-center w-64 h-64  mb-4 rounded-full bg-transparent">
