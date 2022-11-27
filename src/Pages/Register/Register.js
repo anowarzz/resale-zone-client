@@ -18,7 +18,7 @@ const Register = () => {
   const [createdUserEmail, setCreatedUserEmail] = useState("");
   const [signUpError, setSignUpError] = useState("");
   const imageHostKey = process.env.REACT_APP_imgbb_key;
-  console.log(imageHostKey);
+  const [userImage , setUserImage] = useState('');
   
   const navigate = useNavigate();
 
@@ -41,33 +41,41 @@ fetch(url, {
 })
   .then((res) => res.json())
   .then((imgData) => {
+    setUserImage(imgData?.data.url)
     console.log(imgData);
     if (imgData.success) {
-      console.log(imgData.data.url)}})
+      console.log(imgData?.data?.url)
 
+    }})
 
     createUser(data.email, data.password)
-      .then((result) => {
-        const user = result.user;
-        toast.success("SignUp Successful");
-        e.target.reset();
-        navigate("/");
+    .then((result) => {
+      const user = result.user;
+      console.log(user);
       
+      toast.success("SignUp Successful");
+      e.target.reset();
+      navigate("/");
+    
 
-        const userInfo = {
-          displayName: data.name,
-          email: data.email,
-        };
-        updateUser(userInfo)
-          .then(() => {
-            console.log(data);
-          })
-          .catch((err) => {
-            console.log(err);
-            setSignUpError(err.message);
-          });
-      })
-      .catch((error) => console.error(error));
+      const userInfo = {
+        displayName: data.name,
+        email: data.email,
+        photoURL: userImage
+      };
+      updateUser(userInfo)
+        .then(() => {
+          console.log(data);
+          saveUserToDB(data.name, data.email, data.userType, userImage)
+        })
+        .catch((err) => {
+          console.log(err);
+          setSignUpError(err.message);
+        });
+    })
+    .catch((error) => console.error(error));
+
+   
   };
 
 
@@ -86,17 +94,10 @@ fetch(url, {
       });
   };
 
-
-
-
-
-
-
-
   // Adding user info into database
 
-  const saveUser = (name, email) => {
-    const user = { name, email };
+  const saveUserToDB = (name, email, userType, userImg) => {
+    const user = { name, email, userType, userImg };
 
     fetch("http://localhost:5000/users", {
       method: "POST",

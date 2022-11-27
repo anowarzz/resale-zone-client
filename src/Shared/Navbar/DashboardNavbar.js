@@ -2,8 +2,7 @@ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import logo from "../../assets/cart-logo2.jpg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+
 
 const DashboardNavbar = () => {
   const { user, logOut } = useContext(AuthContext);
