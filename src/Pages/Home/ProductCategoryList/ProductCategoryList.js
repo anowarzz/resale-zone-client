@@ -47,7 +47,7 @@ useEffect( () => {
       <div className="grid gap-4 row-gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
        {
-        categories.map(category => <CategoryCard key={category._id} category={category}/>)
+        categories?.map(category => <CategoryCard key={category._id} category={category}/>)
        }
   
     
