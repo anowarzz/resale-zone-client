@@ -66,7 +66,7 @@ const Navbar = () => {
           }
 
           <li>
-            <button onClick={handleLogOut} className="btn bg-Red ml-2 hover:bg-info">
+            <button onClick={handleLogOut} className="btn-sm mt-2 items-center py-0 bg-Red ml-2 hover:bg-info">
               Log Out
             </button>
           </li>
@@ -119,7 +119,7 @@ const Navbar = () => {
         </div>
         <Link
           to="/"
-          className="btn btn-ghost hover:bg-white  normal-case text-2xl md:text-3xl"
+          className="btn btn-ghost hover:bg-transparent  normal-case text-2xl md:text-3xl"
         >
           <img src={logo} className="w-16" alt="" />
           <p className="mx-1 md:mx-3">Resale Zone</p>

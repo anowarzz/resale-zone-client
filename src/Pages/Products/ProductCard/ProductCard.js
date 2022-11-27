@@ -2,7 +2,7 @@ import {  faCheckCircle,faClockFour, faLocationDot, faMarker, } from '@fortaweso
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product, setBookingProduct}) => {
     return (
       <div className="card bg-base-100 shadow-2xl max-w-2xl border-gray-100 border">
       <figure ><img src={product?.image} alt="product" className='h-80' /></figure>
@@ -23,7 +23,10 @@ const ProductCard = ({product}) => {
           product?.isSellerVerified && <span className='pl-1'><FontAwesomeIcon icon={faCheckCircle}/></span>
         }
         </p> 
-        <button className='btn btn-success hover:btn-info'>Book Now</button>
+
+        <label
+        onClick={() => setBookingProduct(product)}
+        htmlFor="booking-modal" className='btn btn-success hover:btn-info'>Book Now</label>
       </div>
     </div>
     );

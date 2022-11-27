@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import BookingModal from "./BookingModal/BookingModal";
 import ProductCard from "./ProductCard/ProductCard";
 
 const Products = () => {
   const products = useLoaderData();
+
+const [bookingProduct, setBookingProduct] = useState(null)  
 
   console.log(products);
 
@@ -13,9 +16,15 @@ const Products = () => {
 
       <div className="grid gap-4 row-gap-5 sm:grid-cols-1 lg:grid-cols-2">
         {products?.map((product) => (
-          <ProductCard key={product._id} product={product} />
+          <ProductCard key={product._id} product={product}
+          setBookingProduct={setBookingProduct}
+          />
         ))}
       </div>
+          { bookingProduct &&
+            <BookingModal bookingProduct={bookingProduct}/>
+          }
+
     </div>
   );
 };

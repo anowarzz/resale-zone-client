@@ -37,7 +37,7 @@ const HeroSection = () => {
        <img
           src={laptop}
           alt=""
-          className="w-5/6 mx-auto mb-12 -mt-20 rounded-lg shadow-md lg:-mt-40 bg-gray-800"
+          className="w-5/6 mx-auto mb-12 -mt-20 rounded-lg shadow-md lg:-mt-40 bg-transparent"
         />
        </div>
       </section>
