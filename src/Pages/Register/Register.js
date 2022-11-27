@@ -20,7 +20,7 @@ const [signUpError, setSignUpError] = useState("");
 const navigate = useNavigate ();
 
 // Creating a new user using email and password
-const handleSignUp = (data, e) => {
+const handleRegister = (data, e) => {
     setSignUpError("");
 
     createUser(data.email, data.password)
@@ -68,7 +68,7 @@ const handleSignUp = (data, e) => {
         <div className="max-w-96 md:w-auto px-16 py-4 border border-gray-200  shadow-slate-500 shadow-lg bg-slate-200">
           <h2 className="text-2xl md:text-3xl text-center my-6">Register</h2>
   
-          <form onSubmit={handleSubmit(handleSignUp)}>
+          <form onSubmit={handleSubmit(handleRegister)}>
             <div className="form-control w-full max-w-xs">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -138,7 +138,7 @@ const handleSignUp = (data, e) => {
             )}
             <input
               className="btn btn-accent w-full mt-4 hover:btn-secondary"
-              value="SignUp"
+              value="Register"
               type="submit"
             />
           </form>

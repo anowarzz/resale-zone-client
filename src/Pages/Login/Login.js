@@ -121,7 +121,7 @@ const navigate = useNavigate ();
             )}
             <input
               className="btn btn-accent w-full mt-4 hover:btn-secondary"
-              value="SignUp"
+              value="Login"
               type="submit"
             />
           </form>
