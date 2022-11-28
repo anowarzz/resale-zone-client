@@ -18,7 +18,7 @@ const ProductCard = ({product, setBookingProduct}) => {
         <p className='font-semibold'> <FontAwesomeIcon icon={faClockFour} className="pr-1"/> Used Time : {product?.usedTime}</p>
         <p className='font-semibold'><FontAwesomeIcon icon={faLocationDot} className="pr-1"/>  {product?.location}</p>
         <p className='font-semibold'> <FontAwesomeIcon icon={faMarker} className="pr-1"/> Posted On :  {product?.postedTime}</p>
-        <p className='font-bold'>Seller : {product?.sellerName} 
+        <p className='font-semibold'>Seller : {product?.sellerName} 
         {
           product?.isSellerVerified && <span className='pl-1'><FontAwesomeIcon icon={faCheckCircle}/></span>
         }
@@ -26,7 +26,7 @@ const ProductCard = ({product, setBookingProduct}) => {
 
         <label
         onClick={() => setBookingProduct(product)}
-        htmlFor="booking-modal" className='btn btn-success hover:btn-info'>Book Now</label>
+        htmlFor="booking-modal" className='btn btn-success hover:btn-info mt-8'>Book Now</label>
       </div>
     </div>
     );
