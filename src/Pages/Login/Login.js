@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../contexts/AuthProvider';
 import { toast } from 'react-toastify';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useToken from '../../Hooks/useToken';
 
 
 const googleProvider = new GoogleAuthProvider();
@@ -14,9 +15,9 @@ const LogIn = () => {
  
  const { register,handleSubmit,formState: { errors },} = useForm();
 const { signIn, googleLogIn } = useContext(AuthContext);
-
+const [loginUserEmail, setLoginUserEmail] = useState("");
 const [loginError, setLoginError] = useState("");
-
+const [token] = useToken(loginUserEmail);
 
   // location
   const location = useLocation();
@@ -32,7 +33,7 @@ const [loginError, setLoginError] = useState("");
     signIn(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        // setLoginUserEmail(data.email);
+        setLoginUserEmail(data.email);
         console.log(user);
         toast.success("Login Successful");
         e.target.reset();
@@ -123,7 +124,7 @@ const [loginError, setLoginError] = useState("");
               <p className="text-sm font-bold text-red-500 py-1">{loginError}</p>
             )}
             <input
-              className="btn btn-accent w-full mt-4 hover:btn-secondary"
+              className="btn bg-primary w-full mt-4 hover:btn-secondary"
               value="Login"
               type="submit"
             />
@@ -131,7 +132,7 @@ const [loginError, setLoginError] = useState("");
   
           <p className="mt-4">
             New to Resale Mart ?
-            <Link to="/register" className="text-primary font-semibold  pl-1">
+            <Link to="/register" className="text-primary font-semibold  pl-1 hover:link">
               Register Now
             </Link>
           </p>

@@ -36,7 +36,15 @@ const router = createBrowserRouter([
       {
         path: '/category/:id',
         element: <PrivateRoute> <Products /> </PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/categoryProducts?id=${params.id}`)
+        loader: async ({params}) => {
+          const res = await fetch(`http://localhost:5000/categoryProducts?id=${params.id}`, {
+            headers: {
+              authorization : `Bearer ${localStorage.getItem('accessToken')}`
+          }
+          })
+          const data = await res.json();
+          return data;
+        }
       },
       // {
       //   path: 'products/categoryId/:id',

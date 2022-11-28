@@ -62,8 +62,6 @@ fetch(url, {
       toast.success("SignUp Successful");
       e.target.reset();
   
-    
-
       const userInfo = {
         displayName: data.name,
         email: data.email,
@@ -73,7 +71,6 @@ fetch(url, {
         .then(() => {
           console.log(data);
           saveUserToDB(data.name, data.email, data.userType, userImage)
-          setCreatedUserEmail(data.email)
         })
         .catch((err) => {
           console.log(err);
@@ -227,7 +224,7 @@ fetch(url, {
             <p className="text-sm font-bold text-red-500 py-1">{signUpError}</p>
           )}
           <input
-            className="btn btn-accent w-full mt-4 hover:btn-secondary"
+            className="btn bg-primary w-full mt-4 hover:btn-secondary"
             value="Register"
             type="submit"
           />
@@ -235,7 +232,7 @@ fetch(url, {
 
         <p className="mt-4">
           Already have an account ?
-          <Link to="/login" className="text-primary font-semibold  pl-1">
+          <Link to="/login" className="text-primary font-semibold  pl-1 hover:link">
             Login Now
           </Link>
         </p>
