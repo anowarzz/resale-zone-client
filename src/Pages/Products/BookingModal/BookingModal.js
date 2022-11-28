@@ -90,11 +90,7 @@ fetch("http://localhost:5000/bookedProducts", {
               type="text"
               name="name"
               placeholder="User Name"
-<<<<<<< HEAD
               className="input font-semibold input-bordered w-full bg-gray-200"
-=======
-              className="input input-bordered w-full bg-gray-200"
->>>>>>> 2e92c395e0ba71d74cc444550845aebec1ee8df5
             />
 
             <input
@@ -103,43 +99,27 @@ fetch("http://localhost:5000/bookedProducts", {
               type="email"
               name="email"
               placeholder="Email Address"
-<<<<<<< HEAD
               className="font-semibold bg-gray-200 input input-bordered w-full"
-=======
-              className="bg-gray-200 input input-bordered w-full"
->>>>>>> 2e92c395e0ba71d74cc444550845aebec1ee8df5
             />
             <input
               type="tel"
               name="phone"
               placeholder="Phone Number"
-<<<<<<< HEAD
               className="bg-gray-200 input input-bordered w-full font-semibold"
-=======
-              className="bg-gray-200 input input-bordered w-full"
->>>>>>> 2e92c395e0ba71d74cc444550845aebec1ee8df5
             />
             <input
          
               type="text"
               name="location"
               placeholder="Location"
-<<<<<<< HEAD
               className="bg-gray-200 input input-bordered w-full font-semibold"
-=======
-              className="bg-gray-200 input input-bordered w-full"
->>>>>>> 2e92c395e0ba71d74cc444550845aebec1ee8df5
             />
 
          
 
             <br />
             <input disabled={booked} 
-<<<<<<< HEAD
               className="w-full btn bnt-accent hover:btn-info"
-=======
-              className="w-full btn bnt-accent"
->>>>>>> 2e92c395e0ba71d74cc444550845aebec1ee8df5
               type="submit"
               value="Book Product"
             />

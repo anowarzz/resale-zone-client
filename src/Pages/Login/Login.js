@@ -4,11 +4,6 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { toast } from "react-toastify";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-
-=======
-import useToken from "../../Hooks/useToken";
->>>>>>> 2e92c395e0ba71d74cc444550845aebec1ee8df5
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -19,23 +14,15 @@ const LogIn = () => {
     formState: { errors },
   } = useForm();
   const { signIn, googleLogIn, updateUser } = useContext(AuthContext);
-<<<<<<< HEAD
   const [loginError, setLoginError] = useState("");
 
-=======
-  const [loginUserEmail, setLoginUserEmail] = useState("");
-  const [loginError, setLoginError] = useState("");
-  const [token] = useToken(loginUserEmail);
->>>>>>> 2e92c395e0ba71d74cc444550845aebec1ee8df5
 
   // location
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
 
-  if (token) {
-    navigate(from, { replace: true });
-  }
+
 
 
   // Login user using email and password
@@ -49,6 +36,7 @@ const LogIn = () => {
         console.log(user);
         toast.success("Login Successful");
         e.target.reset();
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);
@@ -102,13 +90,12 @@ const LogIn = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setLoginUserEmail(email);
+
       });
   }
   catch (error){
 console.log(error);
 
-<<<<<<< HEAD
 
     fetch("http://localhost:5000/users", {
       method: "POST",
@@ -124,10 +111,6 @@ console.log(error);
 
   }
 
-=======
-  }
-  };
->>>>>>> 2e92c395e0ba71d74cc444550845aebec1ee8df5
 
   return (
     <div className="flex flex-col justify-center items-center mb-4">
@@ -220,6 +203,6 @@ console.log(error);
       </div>
     </div>
   );
-};
+};}
 
 export default LogIn;
