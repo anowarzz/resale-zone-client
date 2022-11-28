@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import useToken from "../../Hooks/useToken";
+import Loading from '../../Shared/Loading/Loading'
 
 
 const googleProvider = new GoogleAuthProvider();
@@ -14,20 +16,29 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { createUser, updateUser, googleLogIn } = useContext(AuthContext);
+  const { createUser, updateUser, googleLogIn, loading, setLoading } = useContext(AuthContext);
 
   const [signUpError, setSignUpError] = useState("");
   const imageHostKey = process.env.REACT_APP_imgbb_key;
   const [userImage, setUserImage] = useState("");
 
-
+  const [createdUserEmail, setCreatedUserEmail] = useState('') 
+ const [token] = useToken(createdUserEmail)
 
   const navigate = useNavigate();
+
+
+  if(token){
+    navigate('/')
+  }
+
 
 
   // Register a  new user using email and password
   const handleRegister = (data, e) => {
     setSignUpError("");
+
+setLoading(true)
 
     console.log(data);
 
@@ -45,10 +56,11 @@ const Register = () => {
   })
     .then((res) => res.json())
     .then((imgData) => {
-      setUserImage(imgData?.data.url);
+     
       console.log(imgData);
       if (imgData.success) {
         console.log(imgData?.data?.url);
+        setUserImage(imgData?.data.url);
       }
     });
 
@@ -73,7 +85,8 @@ const Register = () => {
           .then(() => {
             console.log(data);
             saveUserToDB(data.name, data.email, data.userType, userImage);
-            navigate('/')
+            setLoading(false)
+      
           })
           .catch((err) => {
             console.log(err);
@@ -127,13 +140,21 @@ const Register = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setCreatedUserEmail(email)
       });
   };
 
   return (
+
+
+
     <div className="flex flex-col justify-center items-center my-4  bg-white">
       <div className="max-w-96 md:w-auto px-16 py-4 border border-gray-200  shadow-slate-500 shadow-lg bg-slate-200">
         <h2 className="text-2xl md:text-3xl text-center my-6">Register</h2>
+
+        {
+          loading && <Loading />
+        }
 
         <form onSubmit={handleSubmit(handleRegister)}>
           <div className="form-control w-full max-w-xs">

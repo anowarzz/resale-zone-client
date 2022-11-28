@@ -63,7 +63,7 @@ setLoading(false)
 
 
 // Sending context value 
-  const authInfo = { user, setUser, loading, createUser, signIn ,googleLogIn, updateUser, logOut
+  const authInfo = { user, setUser, loading, setLoading, createUser, signIn ,googleLogIn, updateUser, logOut
   };
 
   return (
