@@ -9,9 +9,7 @@ const Products = () => {
   const products = useLoaderData();
 
 
-const [bookingProduct, setBookingProduct] = useState(null)  
-
-  console.log(products);
+const [bookingProduct, setBookingProduct] = useState(null) 
 
 
 
@@ -27,7 +25,7 @@ const [bookingProduct, setBookingProduct] = useState(null)
         ))}
       </div>
           { bookingProduct &&
-            <BookingModal bookingProduct={bookingProduct}/>
+            <BookingModal bookingProduct={bookingProduct} setBookingProduct={setBookingProduct}/>
           }
 
     </div>

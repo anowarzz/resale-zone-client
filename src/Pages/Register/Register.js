@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GoogleAuthProvider } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import useToken from "../../Hooks/useToken";
+
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -16,72 +16,73 @@ const Register = () => {
   } = useForm();
   const { createUser, updateUser, googleLogIn } = useContext(AuthContext);
 
-  const [createdUserEmail, setCreatedUserEmail] = useState("");
   const [signUpError, setSignUpError] = useState("");
   const imageHostKey = process.env.REACT_APP_imgbb_key;
-  const [userImage , setUserImage] = useState('');
-  
-  const [token] =  useToken(createdUserEmail)
+  const [userImage, setUserImage] = useState("");
+
+
 
   const navigate = useNavigate();
-  
-  if(token){
-    navigate('/')
-  }
+
+
   // Register a  new user using email and password
   const handleRegister = (data, e) => {
     setSignUpError("");
 
+    console.log(data);
 
-console.log(data);
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
 
-const image = data.image[0];
-const formData = new FormData();
-formData.append("image", image);
 
-const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
 
-fetch(url, {
-  method: "POST",
-  body: formData,
-})
-  .then((res) => res.json())
-  .then((imgData) => {
-    setUserImage(imgData?.data.url)
-    console.log(imgData);
-    if (imgData.success) {
-      console.log(imgData?.data?.url)
+  const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
 
-    }})
+  fetch(url, {
+    method: "POST",
+    body: formData,
+  })
+    .then((res) => res.json())
+    .then((imgData) => {
+      setUserImage(imgData?.data.url);
+      console.log(imgData);
+      if (imgData.success) {
+        console.log(imgData?.data?.url);
+      }
+    });
+
+ 
+
+
 
     createUser(data.email, data.password)
-    .then((result) => {
-      const user = result.user;
-      console.log(user);
-      
-      toast.success("SignUp Successful");
-      e.target.reset();
-  
-      const userInfo = {
-        displayName: data.name,
-        email: data.email,
-        photoURL: userImage
-      };
-      updateUser(userInfo)
-        .then(() => {
-          console.log(data);
-          saveUserToDB(data.name, data.email, data.userType, userImage)
-        })
-        .catch((err) => {
-          console.log(err);
-          setSignUpError(err.message);
-        });
-    })
-    .catch((error) => console.error(error));
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
 
-   
+        toast.success("SignUp Successful");
+        e.target.reset();
+
+        const userInfo = {
+          displayName: data.name,
+          email: data.email,
+          photoURL: userImage,
+        };
+        updateUser(userInfo)
+          .then(() => {
+            console.log(data);
+            saveUserToDB(data.name, data.email, data.userType, userImage);
+            navigate('/')
+          })
+          .catch((err) => {
+            console.log(err);
+            setSignUpError(err.message);
+          });
+    
+      })
+      .catch((error) => console.error(error));
   };
-
 
   // Register user using google
   const handleGoogleSignUp = () => {
@@ -89,6 +90,20 @@ fetch(url, {
       .then((result) => {
         const user = result.user;
         console.log(user);
+
+        // updating user info in firebase
+        const userInfo = {
+          displayName: user?.displayName,
+          email: user?.email,
+          photoURL: user?.photoURL,
+        };
+        updateUser(userInfo);
+        //sending user info to db
+        const name = user?.displayName;
+        const email = user?.email;
+        const userType = "buyer";
+        const userImg = user?.photoURL;
+        saveUserToDB(name, email, userType, userImg);
         toast.success("Register Successful");
         navigate("/");
       })
@@ -112,7 +127,6 @@ fetch(url, {
     })
       .then((res) => res.json())
       .then((data) => {
-        setCreatedUserEmail(email);
       });
   };
 
@@ -170,28 +184,29 @@ fetch(url, {
               })}
               className="select select-bordered w-full max-w-xs"
             >
-              <option defaultValue value="buyer">Buyer</option>
+              <option defaultValue value="buyer">
+                Buyer
+              </option>
               <option value="seller">Seller</option>
             </select>
           </div>
 
           <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Photo</span>
-          </label>
-          <input
-            {...register("image", {})}
-            type="file"
-            className="input input-bordered w-full"
-            placeholder="Upload a photo"
-          />
-          {errors.image && (
-            <p className="text-sm font-bold text-red-500">
-              {errors.image?.message}
-            </p>
-          )}
-        </div>
-
+            <label className="label">
+              <span className="label-text">Photo</span>
+            </label>
+            <input
+              {...register("image", {})}
+              type="file"
+              className="input input-bordered w-full"
+              placeholder="Upload a photo"
+            />
+            {errors.image && (
+              <p className="text-sm font-bold text-red-500">
+                {errors.image?.message}
+              </p>
+            )}
+          </div>
 
           <div className="form-control w-full max-w-xs">
             <label className="label">
@@ -232,7 +247,10 @@ fetch(url, {
 
         <p className="mt-4">
           Already have an account ?
-          <Link to="/login" className="text-primary font-semibold  pl-1 hover:link">
+          <Link
+            to="/login"
+            className="text-primary font-semibold  pl-1 hover:link"
+          >
             Login Now
           </Link>
         </p>
