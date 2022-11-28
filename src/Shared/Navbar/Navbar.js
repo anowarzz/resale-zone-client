@@ -4,8 +4,14 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import logo from "../../assets/cart-logo2.jpg";
 
 
+
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut, users } = useContext(AuthContext);
+
+  console.log(users);
+  
+
+
 
   const handleLogOut = () => {
     logOut()
