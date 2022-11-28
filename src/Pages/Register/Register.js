@@ -3,7 +3,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useToken from "../../Hooks/useToken";
 import Loading from '../../Shared/Loading/Loading'
 
@@ -25,11 +25,14 @@ const Register = () => {
   const [createdUserEmail, setCreatedUserEmail] = useState('') 
  const [token] = useToken(createdUserEmail)
 
+  // location
+
   const navigate = useNavigate();
+  
 
 
   if(token){
-    navigate('/')
+ navigate('/')
   }
 
 
@@ -74,17 +77,19 @@ setLoading(true)
         console.log(user);
 
         toast.success("SignUp Successful");
+     
         e.target.reset();
 
         const userInfo = {
-          displayName: data.name,
-          email: data.email,
+          displayName: data?.name,
+          email: data?.email,
           photoURL: userImage,
         };
         updateUser(userInfo)
           .then(() => {
             console.log(data);
             saveUserToDB(data.name, data.email, data.userType, userImage);
+         
             setLoading(false)
       
           })
@@ -111,6 +116,7 @@ setLoading(true)
           photoURL: user?.photoURL,
         };
         updateUser(userInfo);
+        setCreatedUserEmail(user?.email)
         //sending user info to db
         const name = user?.displayName;
         const email = user?.email;
@@ -118,7 +124,7 @@ setLoading(true)
         const userImg = user?.photoURL;
         saveUserToDB(name, email, userType, userImg);
         toast.success("Register Successful");
-        navigate("/");
+        // navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);
@@ -131,6 +137,7 @@ setLoading(true)
   const saveUserToDB = (name, email, userType, userImg) => {
     const user = { name, email, userType, userImg };
 
+  try{
     fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
@@ -142,6 +149,11 @@ setLoading(true)
       .then((data) => {
         setCreatedUserEmail(email)
       });
+  }
+  finally{
+
+  }
+
   };
 
   return (

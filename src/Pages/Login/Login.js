@@ -5,6 +5,7 @@ import { AuthContext } from '../../contexts/AuthProvider';
 import { toast } from 'react-toastify';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useToken from '../../Hooks/useToken';
+import Loading from '../../Shared/Loading/Loading';
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -13,7 +14,7 @@ const Login = () => {
 
 
   const {register,handleSubmit,formState: { errors },} = useForm();
-  const { signIn, googleLogIn, updateUser } = useContext(AuthContext);
+  const { signIn, googleLogIn, updateUser, loading, setLoading } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
   const [loginUserEmail, setLoginUserEmail] = useState("");
   const [token] = useToken(loginUserEmail);
@@ -31,6 +32,8 @@ const Login = () => {
 
   // Login user using email and password
   const handleLogin = (data, e) => {
+
+    setLoading(true)
     e.preventDefault();
     console.log(data);
     setLoginError("");
@@ -39,9 +42,11 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+  //  setLoginUserEmail(data.email)
         toast.success("Login Successful");
-        setLoginUserEmail(data.email);
+        navigate(from, { replace: true });
         e.target.reset();
+        setLoading(false)
       })
       .catch((err) => {
         console.log(err);
@@ -55,7 +60,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        // setLoginUserEmail(user?.email);
+ 
         // saving user info to firebase
         const userInfo = {
           displayName: user?.displayName,
@@ -63,6 +68,7 @@ const Login = () => {
           photoURL: user?.photoURL,
         };
         updateUser(userInfo);
+        setLoading(true)
 
         // saving user to db
         const name = user?.displayName;
@@ -71,8 +77,9 @@ const Login = () => {
         const userImg = user?.photoURL;
         saveUserToDB(name, email, userType, userImg);
         toast.success("Login Successful");
+        setLoading(false)
         navigate(from, { replace: true });
-      
+ 
       })
       .catch((err) => {
         console.log(err);
@@ -84,17 +91,22 @@ const Login = () => {
   const saveUserToDB = (name, email, userType, userImg) => {
     const user = { name, email, userType, userImg };
 
-    fetch("http://localhost:5000/users", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",  
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-       
-      });
+ try{
+  fetch("http://localhost:5000/users", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",  
+    },
+    body: JSON.stringify(user),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      setLoginUserEmail(email)
+    });
+ }
+ finally{
+
+ }
 
     }
 
@@ -104,6 +116,9 @@ const Login = () => {
     <div className="max-w-96 md:w-auto px-16 py-4 border border-gray-200  shadow-slate-500 shadow-lg bg-slate-200">
       <h2 className="text-2xl md:text-3xl text-center my-6">Login</h2>
 
+      {
+          loading && <Loading />
+        }
 
       <form onSubmit={handleSubmit(handleLogin)}>
           <div className="form-control w-full max-w-xs">

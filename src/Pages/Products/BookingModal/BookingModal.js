@@ -102,14 +102,14 @@ fetch("http://localhost:5000/bookedProducts", {
               className="font-semibold bg-gray-200 input input-bordered w-full"
             />
             <input
-              type="tel"
+              type="tel"  required
               name="phone"
               placeholder="Phone Number"
               className="bg-gray-200 input input-bordered w-full font-semibold"
             />
             <input
          
-              type="text"
+              type="text" required
               name="location"
               placeholder="Location"
               className="bg-gray-200 input input-bordered w-full font-semibold"
