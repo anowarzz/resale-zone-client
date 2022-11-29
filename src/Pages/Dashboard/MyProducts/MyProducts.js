@@ -116,13 +116,24 @@ const MyProducts = () => {
                   <p className="badge badge-primary">{product?.status}</p>
                 </td>
                 <td>
-                  <button
-                    onClick={() => handleAdvertise(product._id)}
-                    disabled={product?.isAdvertised}
-                    className="btn btn-sm btn-info hover:btn-success"
-                  >
-                    Advertise
-                  </button>
+
+                    {
+                        product?.isAdvertised ?  <button
+                        onClick={() => handleAdvertise(product._id)}
+                    
+                        className="btn btn-sm btn-success hover:btn-info"
+                      >
+                        Already Advertised
+                      </button> :
+                       <button
+                       onClick={() => handleAdvertise(product._id)}
+                 
+                       className="btn btn-sm btn-info hover:btn-success"
+                     >
+                       Advertise
+                     </button>
+                    }
+                 
                 </td>
                 <td>
                   <label
