@@ -25,28 +25,35 @@ const DashboardLayout = () => {
           <ul className="menu p-4 w-80 bg-base-100 text-base-content">
             {/* <!-- Sidebar content here --> */}
 
-       
+            {buyerRole && (
               <li className="border-gray-100 bg-gray-800 shadow-xl text-gray-50 mb-1 hover:bg-sky-500">
                 <Link to="/dashboard/myOrders">My Orders</Link>
               </li>
-      
-              <li className="border-gray-100 bg-gray-800 shadow-xl text-gray-50 mb-1 hover:bg-sky-500">
-                <Link to="/dashboard/addProducts">Add Products</Link>
-              </li>
-      
-              <li className="border-gray-100 bg-gray-800 shadow-xl text-gray-50 mb-1 hover:bg-sky-500">
-                <Link to="/dashboard/myProducts">My Products</Link>
-              </li>
-      
-              <li className="border-gray-100 bg-gray-800 shadow-xl text-gray-50 mb-1 hover:bg-sky-500">
-                <Link to="/dashboard/allBuyers">All Buyers</Link>
-              </li>
-      
-              <li className="border-gray-100 bg-gray-800 shadow-xl text-gray-50 mb-1 hover:bg-sky-500">
-                <Link to="/dashboard/allSellers">All Seller</Link>
-              </li>
-      
+            )}
 
+            {sellerRole && (
+              <>
+                <li className="border-gray-100 bg-gray-800 shadow-xl text-gray-50 mb-1 hover:bg-sky-500">
+                  <Link to="/dashboard/addProducts">Add Products</Link>
+                </li>
+
+                <li className="border-gray-100 bg-gray-800 shadow-xl text-gray-50 mb-1 hover:bg-sky-500">
+                  <Link to="/dashboard/myProducts">My Products</Link>
+                </li>
+              </>
+            )}
+
+            {adminRole && (
+              <>
+                <li className="border-gray-100 bg-gray-800 shadow-xl text-gray-50 mb-1 hover:bg-sky-500">
+                  <Link to="/dashboard/allBuyers">All Buyers</Link>
+                </li>
+
+                <li className="border-gray-100 bg-gray-800 shadow-xl text-gray-50 mb-1 hover:bg-sky-500">
+                  <Link to="/dashboard/allSellers">All Seller</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

@@ -67,39 +67,40 @@ setLoading(true)
       }
     });
 
+    createUser(data.email, data.password)
+    .then((result) => {
+      const user = result.user;
+      console.log(user);
+
+      toast.success("SignUp Successful");
+   
+      e.target.reset();
+
+      const userInfo = {
+        displayName: data?.name,
+        email: data?.email,
+        photoURL: userImage,
+      };
+      updateUser(userInfo)
+        .then(() => {
+          console.log(data);
+          saveUserToDB(data.name, data.email, data.userType, userImage);
+       
+          setLoading(false)
+    
+        })
+        .catch((err) => {
+          console.log(err);
+          setSignUpError(err.message);
+        });
+  
+    })
+    .catch((error) => console.error(error));
  
 
 
 
-    createUser(data.email, data.password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-
-        toast.success("SignUp Successful");
-     
-        e.target.reset();
-
-        const userInfo = {
-          displayName: data?.name,
-          email: data?.email,
-          photoURL: userImage,
-        };
-        updateUser(userInfo)
-          .then(() => {
-            console.log(data);
-            saveUserToDB(data.name, data.email, data.userType, userImage);
-         
-            setLoading(false)
-      
-          })
-          .catch((err) => {
-            console.log(err);
-            setSignUpError(err.message);
-          });
-    
-      })
-      .catch((error) => console.error(error));
+ 
   };
 
   // Register user using google
@@ -151,7 +152,6 @@ setLoading(true)
       });
   }
   finally{
-
   }
 
   };
