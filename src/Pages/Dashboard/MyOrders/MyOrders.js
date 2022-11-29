@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
+import DashboardNavbar from "../../../Shared/Navbar/DashboardNavbar";
+import MyOrderCard from "./MyOrderCard";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
@@ -21,10 +23,25 @@ const MyOrders = () => {
   });
 
   return (
-    <div className="border mx-auto">
-      <h2 className="text-2xl md:text-4xl font-semibold text-center">
-        My Orders {myOrders.length}
+
+      
+      <div className="mx-auto">
+      <h2 className="text-2xl md:text-4xl font-semibold text-center mb-8">
+        My Orders
       </h2>
+
+      {
+        myOrders.length < 1 && <>
+        <h3 className="text-center text-blue-500 text-lg font-semibold mt-10">You Have Not Placed Any Order Yet
+            </h3>
+            </>
+      }
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {
+            myOrders.map(order => <MyOrderCard key={order._id} order={order}/>)
+        }
+      </div>
     </div>
   );
 };

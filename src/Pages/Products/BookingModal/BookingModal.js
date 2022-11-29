@@ -20,12 +20,14 @@ event.preventDefault();
 
 const form = event.target;
 const productName = bookingProduct?.title;
-const productPrice = bookingProduct?.price;
+const productPrice = bookingProduct?.resalePrice;
 const buyerName =form.name.value;
 const buyerEmail =form.email.value;
 const buyerPhone = form.phone.value;
 const location = form.location.value;
-const sellerName = bookingProduct?.sellerName; 
+const sellerName = bookingProduct?.sellerName;
+const image = bookingProduct?.image
+ 
 
 const bookedProduct = {
     productName,
@@ -35,6 +37,7 @@ const bookedProduct = {
     buyerPhone,
     location,
     sellerName,
+    image,
     bookingDate:  format(new Date(), 'PP')
 
 

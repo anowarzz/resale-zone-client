@@ -92,6 +92,7 @@ setLoading(true)
         .catch((err) => {
           console.log(err);
           setSignUpError(err.message);
+          setLoading(false)
         });
   
     })

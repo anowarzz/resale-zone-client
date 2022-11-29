@@ -20,9 +20,12 @@ const DashboardLayout = () => {
         <input id="dashboardDrawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
 
-          {
-            buyerRole ? <MyOrders /> :  <Outlet />
-          }
+<div>
+  {
+    buyerRole && <MyOrders />
+  }
+<Outlet />
+</div>
 
         </div>
         <div className="drawer-side">

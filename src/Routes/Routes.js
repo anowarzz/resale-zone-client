@@ -5,6 +5,7 @@ import Blog from "../Pages/Blog/Blog";
 import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
 import AllBuyers from "../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../Pages/Dashboard/AllSellers.js/AllSellers";
+import Payment from "../Pages/Dashboard/Dashboard/Payment/Payment";
 import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
@@ -66,10 +67,6 @@ const router = createBrowserRouter([
     element: <PrivateRoute> <DashboardLayout /> </PrivateRoute>,
     children: [
       {
-      path: '/dashboard/myOrders',
-      element: <MyOrders />
-      },
-      {
         path: "/dashboard/addProducts",
         element: <AddProduct />
       },
@@ -85,8 +82,17 @@ const router = createBrowserRouter([
         path: "/dashboard/allSellers",
         element: <AllSellers />
       },
+    
     ]
-  }
+  },
+  {
+    path: '/dashboard/myOrders',
+    element: <MyOrders />
+    },
+    {
+      path: '/dashboard/payment',
+      element: <Payment />
+    }
 ]);
 
 
