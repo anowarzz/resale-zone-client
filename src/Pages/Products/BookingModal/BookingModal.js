@@ -27,7 +27,6 @@ const buyerPhone = form.phone.value;
 const location = form.location.value;
 const sellerName = bookingProduct?.sellerName; 
 
-
 const bookedProduct = {
     productName,
     productPrice,

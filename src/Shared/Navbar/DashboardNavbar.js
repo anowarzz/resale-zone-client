@@ -67,7 +67,7 @@ const DashboardNavbar = () => {
           }
 
           <li>
-            <button onClick={handleLogOut} className="btn-sm mt-2 bg-Red ml-2 hover:bg-info">
+            <button onClick={handleLogOut} className="btn-sm mt-2  bg-Red ml-2 hover:bg-info">
               Log Out
             </button>
           </li>

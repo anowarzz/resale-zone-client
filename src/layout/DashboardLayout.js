@@ -3,6 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 import useRole from "../Hooks/useRole";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
+import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
 import DashboardNavbar from "../Shared/Navbar/DashboardNavbar";
 
 const DashboardLayout = () => {
@@ -18,7 +19,11 @@ const DashboardLayout = () => {
       <div className="drawer drawer-mobile">
         <input id="dashboardDrawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
-          <Outlet />
+
+          {
+            buyerRole ? <MyOrders /> :  <Outlet />
+          }
+
         </div>
         <div className="drawer-side">
           <label htmlFor="dashboardDrawer" className="drawer-overlay"></label>
