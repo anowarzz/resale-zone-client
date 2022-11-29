@@ -65,10 +65,11 @@ const sellerContact = data?.contactNumber;
 const description = data?.description;
 const sellerName = user?.displayName;
 const sellerEmail = user?.email;
-const status = 'unsold'
+const status = 'unsold';
+const isAdvertised = false;
 
 
-const product = {title, originalPrice, resalePrice,  categoryId, condition, location, usedYears, postedTime, sellerContact, description, sellerName,image, sellerEmail, status}
+const product = {title, originalPrice, resalePrice,  categoryId, condition, location, usedYears, postedTime, sellerContact, description, sellerName,image, sellerEmail, status, isAdvertised}
 
 
 

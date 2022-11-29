@@ -30,6 +30,28 @@ const MyProducts = () => {
     });
 
 
+
+  // Advertise a product
+  const handleAdvertise = (id) => {
+    fetch(`http://localhost:5000/products/advertise/${id}`, {
+      method: "PUT",
+      headers: {
+        'content-type': 'application/json'
+        // authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+       if(data.modifiedCount > 0){
+        toast.success("Product Added to Advertisement section")
+       }
+      });
+  };
+
+
+
+
+
   // Delete a product from database
   const handleDeleteProduct = (product) => {
 
@@ -101,7 +123,9 @@ if(isLoading){
                  </p>
           </td>
           <td>
-            <button className='btn btn-sm btn-info hover:btn-success'>Advertise</button>
+            <button 
+            onClick={() => handleAdvertise(product._id)}
+            className='btn btn-sm btn-info hover:btn-success'>Advertise</button>
           </td>
           <td>
             <label
