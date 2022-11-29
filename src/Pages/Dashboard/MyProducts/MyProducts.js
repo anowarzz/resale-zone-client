@@ -1,15 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
 import Loading from '../../../Shared/Loading/Loading';
 
 const MyProducts = () => {
     
     const  {user} = useContext(AuthContext)
 
+    const [deletingProduct, setDeletingProduct] = useState(null);
+
+    const closeModal = () => {
+        setDeletingProduct(null)
+    };
+
     const url = `http://localhost:5000/myProducts?email=${user?.email}`;
 
-    const { data: myProducts = [], isLoading } = useQuery({
+    const { data: myProducts = [], isLoading, refetch } = useQuery({
       queryKey: ['myProducts', user?.email],
       queryFn: async () => {
         const res = await fetch(url, {
@@ -20,6 +28,35 @@ const MyProducts = () => {
         return data;
       },
     });
+
+
+  // Delete a product from database
+  const handleDeleteProduct = (product) => {
+
+    const id = product._id;
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: "DELETE",
+      headers: {
+        // authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.deletedCount > 0) {
+  
+          toast.success(`Product ${product?.title} deleted successfully`);
+          refetch();
+       
+        }
+      });
+  };
+
+
+
+
+
+
 
 if(isLoading){
     <Loading />
@@ -48,7 +85,9 @@ if(isLoading){
  {
     myProducts.map((product, i)=> <tr key={product._id}>
           <th>{i+1}</th>
-          <td>{product?.title}</td>
+          <td>
+            <h3 className='text-lg font-semibold'>{product?.title}</h3>
+          </td>
           <td>
           <div className="avatar">
                     <div className="w-24 rounded-xl">
@@ -63,7 +102,13 @@ if(isLoading){
             <button className='btn btn-sm btn-info hover:btn-success'>Advertise</button>
           </td>
           <td>
-            <button className='btn btn-error btn-sm hover:bg-Red hover:border border-transparent'>Delete</button>
+            <label
+                    htmlFor="confirmation-modal"
+                    onClick={() => setDeletingProduct(product)}
+                    className='btn btn-error btn-sm hover:bg-Red hover:border border-transparent'
+                  >
+               Delete
+                  </label>
           </td>
         </tr>)
  }
@@ -71,6 +116,16 @@ if(isLoading){
     </tbody>
   </table>
 </div>
+{deletingProduct && (
+        <ConfirmationModal
+          title={`Ary You Sure You Want To Delete This Product  ??` }
+          message={`Once you delete  it can not be undone`}
+          successAction={handleDeleteProduct}
+          modalData={deletingProduct}
+          closeModal={closeModal}
+          successButtonName="Delete"
+        />
+      )}
       </div>
 
     
