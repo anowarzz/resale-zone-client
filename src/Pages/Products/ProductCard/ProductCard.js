@@ -15,7 +15,7 @@ const ProductCard = ({product, setBookingProduct}) => {
           <p className="badge badge-outline font-bold "> <span className='text-primary'>Resale Price : {product?.resalePrice}</span></p> 
           <p className="badge badge-outline font-bold"><span className='text-error'>Original Price : ${product?.originalPrice}</span></p>
         </div>
-        <p className='font-semibold'> <FontAwesomeIcon icon={faClockFour} className="pr-1"/> Used Time : {product?.usedTime}</p>
+        <p className='font-semibold'> <FontAwesomeIcon icon={faClockFour} className="pr-1"/> Used Time : {product?.usedYears} Year</p>
         <p className='font-semibold'><FontAwesomeIcon icon={faLocationDot} className="pr-1"/>  {product?.location}</p>
         <p className='font-semibold'> <FontAwesomeIcon icon={faMarker} className="pr-1"/> Posted On :  {product?.postedTime}</p>
         <p className='font-semibold'>Seller : {product?.sellerName} 
@@ -23,6 +23,8 @@ const ProductCard = ({product, setBookingProduct}) => {
           product?.isSellerVerified && <span className='pl-1'><FontAwesomeIcon icon={faCheckCircle}/></span>
         }
         </p> 
+
+        <p className='text-lg my-2'>{product?.description}</p>
 
         <label
         onClick={() => setBookingProduct(product)}

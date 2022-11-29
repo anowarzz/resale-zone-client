@@ -1,20 +1,112 @@
-import React from 'react';
+import { format } from 'date-fns';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Navigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../../../contexts/AuthProvider';
+import Loading from '../../../Shared/Loading/Loading';
 
 const AddProduct = () => {
 
+const {user} = useContext(AuthContext)
+
+const [loading, setLoading] = useState(false)
 
     const {register,handleSubmit,formState: { errors },
       } = useForm();
+    
+      const imageHostKey = process.env.REACT_APP_imgbb_key;
 
-const handleAddProduct = () => {
 
+const handleAddProduct = (data, e) => {
+
+setLoading(true)
+
+
+
+const today  = new Date();
+const thisYear = today.getFullYear()
+const totalUsedTime = thisYear - data?.purchaseYear
+
+
+
+
+
+
+    //Saving image to hosting site 
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+
+  const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+
+  fetch(url, {
+    method: "POST",
+    body: formData,
+  })
+    .then((res) => res.json())
+    .then((imgData) => {
+      console.log(imgData);
+      if (imgData.success) {
+        console.log(imgData?.data?.url);
+
+
+const title = data?.productName;
+const image = imgData?.data?.url
+const originalPrice = data?.originalPrice;
+const resalePrice = data?.resalePrice ;
+const categoryId = data?.categoryName;
+const condition = data?.condition;
+const location = data?.location;
+const usedTime = totalUsedTime;
+const postedTime = format(new Date(), 'PP')
+const sellerContact = data?.contactNumber;
+const description = data?.description;
+const sellerName = user?.displayName;
+
+
+const product = {title, originalPrice, resalePrice,  categoryId, condition, location, usedTime, postedTime, sellerContact, description, sellerName,image}
+
+
+
+
+    //save doctor information to the db
+    fetch("http://localhost:5000/products", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        //   authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(product),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result);
+          toast.success(`Product ${data.productName} added Successfully`)
+          setLoading(false)
+          e.target.reset();
+     
+        });
+
+   
+      }
+    });
+
+
+
+
+    
 }
 
 
     return (
         <div>
           
+          {
+          loading && <Loading />
+        }
+
+
         <div>
             <h2 className="text-2xl md:text-4xl font-semibold text-center mb-10">
               <span className="">
@@ -99,11 +191,11 @@ const handleAddProduct = () => {
               })}
               className="select select-bordered w-full max-w-xs text-black"
             >
-              <option defaultValue value="buyer">
+              <option defaultValue value="Good">
                 Good
               </option>
-              <option value="seller">Fair</option>
-              <option value="seller">Excellent</option>
+              <option value="Fair">Fair</option>
+              <option value="Excellent">Excellent</option>
             </select>
           </div>
 
@@ -118,9 +210,9 @@ const handleAddProduct = () => {
               })}
               className="select select-bordered w-full max-w-xs text-black"
             >
-              <option  value="Hp Laptops"> Hp Laptops</option>
-              <option value="Dell Laptops">Dell Laptops</option>
-              <option value="Acer Laptops">Acer Laptops</option>
+              <option  value="01">Hp Laptops</option>
+              <option value="02">Dell Laptops</option>
+              <option value="03">Acer Laptops</option>
             </select>
           </div>
 
@@ -178,13 +270,13 @@ const handleAddProduct = () => {
 
           <div className="form-control max-w-lg mx-auto ">
             <label className="label ">
-              <span className="text-white">Total Used Time</span>
+              <span className="text-white">Year Of Purchase</span>
             </label>
             <input
-              {...register("usedTime")}
-              type="text"
+              {...register("purchaseYear")}
+         type="number" min="1900" max="2021" step="1"
               className="input input-bordered w-full font-semibold"
-              placeholder="Total Used Time (Month/Year)"
+              placeholder="Year Of Purchase"
             />
           </div>
 
