@@ -9,6 +9,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import useRole from "../Hooks/useRole";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -16,7 +17,6 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [users, setAllUsers] = useState([]) 
 
 
   // Registering a new user
@@ -60,21 +60,12 @@ setLoading(false)
 }, [])
 
 
-// loading user from database
-useEffect(() => {
-if(user){
-  fetch(`http://localhost:5000/users?email=${user?.email}`)
-  .then((res) => res.json())
-  .then((data) => setAllUsers(data));
-}
-}, [user?.email]);
 
-console.log(users);
 
 
 
 // Sending context value 
-  const authInfo = { user, setUser, loading, setLoading, createUser, signIn ,googleLogIn, updateUser, logOut, users
+  const authInfo = { user, setUser, loading, setLoading, createUser, signIn ,googleLogIn, updateUser, logOut
   };
 
   return (
