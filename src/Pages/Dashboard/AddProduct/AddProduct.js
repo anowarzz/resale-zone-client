@@ -65,9 +65,10 @@ const sellerContact = data?.contactNumber;
 const description = data?.description;
 const sellerName = user?.displayName;
 const sellerEmail = user?.email;
+const status = 'unsold'
 
 
-const product = {title, originalPrice, resalePrice,  categoryId, condition, location, usedYears, postedTime, sellerContact, description, sellerName,image, sellerEmail}
+const product = {title, originalPrice, resalePrice,  categoryId, condition, location, usedYears, postedTime, sellerContact, description, sellerName,image, sellerEmail, status}
 
 
 

@@ -96,7 +96,9 @@ if(isLoading){
                   </div>
           </td>
           <td>
-            <p className='badge badge-primary'>Status</p>
+            <p className='badge badge-primary'>
+             {product?.status}
+                 </p>
           </td>
           <td>
             <button className='btn btn-sm btn-info hover:btn-success'>Advertise</button>
