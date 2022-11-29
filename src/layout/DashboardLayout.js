@@ -4,6 +4,7 @@ import { AuthContext } from "../contexts/AuthProvider";
 import useRole from "../Hooks/useRole";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
 import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
+import Loading from "../Shared/Loading/Loading";
 import DashboardNavbar from "../Shared/Navbar/DashboardNavbar";
 
 const DashboardLayout = () => {
@@ -12,8 +13,13 @@ const DashboardLayout = () => {
     user?.email
   );
 
+if(isRoleLoading){
+  <Loading />
+}
+
+
   return (
-    <div className="">
+    <div className="bg-gray-200">
       <DashboardNavbar />
 
       <div className="drawer drawer-mobile">
@@ -30,7 +36,7 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-side">
           <label htmlFor="dashboardDrawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 bg-base-100 text-base-content">
+          <ul className="menu p-4 w-80 bg-gray-300 text-base-content">
             {/* <!-- Sidebar content here --> */}
 
             {buyerRole && (

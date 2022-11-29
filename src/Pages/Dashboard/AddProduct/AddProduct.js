@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import Loading from '../../../Shared/Loading/Loading';
@@ -11,6 +11,7 @@ const AddProduct = () => {
 const {user} = useContext(AuthContext)
 
 const [loading, setLoading] = useState(false)
+const navigate  = useNavigate();
 
     const {register,handleSubmit,formState: { errors },
       } = useForm();
@@ -58,14 +59,15 @@ const resalePrice = data?.resalePrice ;
 const categoryId = data?.categoryName;
 const condition = data?.condition;
 const location = data?.location;
-const usedTime = totalUsedTime;
+const usedYears = totalUsedTime;
 const postedTime = format(new Date(), 'PP')
 const sellerContact = data?.contactNumber;
 const description = data?.description;
 const sellerName = user?.displayName;
+const sellerEmail = user?.email;
 
 
-const product = {title, originalPrice, resalePrice,  categoryId, condition, location, usedTime, postedTime, sellerContact, description, sellerName,image}
+const product = {title, originalPrice, resalePrice,  categoryId, condition, location, usedYears, postedTime, sellerContact, description, sellerName,image, sellerEmail}
 
 
 
@@ -85,16 +87,13 @@ const product = {title, originalPrice, resalePrice,  categoryId, condition, loca
           toast.success(`Product ${data.productName} added Successfully`)
           setLoading(false)
           e.target.reset();
+          navigate('/dashboard/myProducts')
      
         });
 
    
       }
     });
-
-
-
-
     
 }
 
@@ -106,9 +105,8 @@ const product = {title, originalPrice, resalePrice,  categoryId, condition, loca
           loading && <Loading />
         }
 
-
         <div>
-            <h2 className="text-2xl md:text-4xl font-semibold text-center mb-10">
+            <h2 className="text-2xl md:text-4xl font-semibold text-center my-10">
               <span className="">
                Add A New Product
               </span>
@@ -122,7 +120,7 @@ const product = {title, originalPrice, resalePrice,  categoryId, condition, loca
 
        
 
-          <div className="form-control max-w-lg mx-auto ">
+          <div className="form-control max-w-xl mx-auto ">
             <label className="label ">
               <span className="text-white">Product Name</span>
             </label>
@@ -166,7 +164,7 @@ const product = {title, originalPrice, resalePrice,  categoryId, condition, loca
             </label>
             <input
               {...register("resalePrice", {
-                required: "Original Price Is Required",
+                required: "Resale Price Is Required",
               })}
               type="number"
               className="input input-bordered w-full font-semibold"
@@ -180,7 +178,8 @@ const product = {title, originalPrice, resalePrice,  categoryId, condition, loca
           </div>
 
 
-          <div className="form-control w-full max-w-lg mx-auto">
+   <div className='flex gap-4'>
+   <div className="form-control w-full max-w-lg mx-auto">
             <label className="label">
               <span className="text-white">Product Condition</span>
             </label>
@@ -216,7 +215,12 @@ const product = {title, originalPrice, resalePrice,  categoryId, condition, loca
             </select>
           </div>
 
-          <div className="form-control w-full max-w-lg mx-auto">
+   </div>
+
+
+   <div className='flex gap-4'>
+    
+   <div className="form-control  max-w-lg mx-auto w-2/4">
             <label className="label">
               <span className="text-white">Location</span>
             </label>
@@ -256,6 +260,7 @@ const product = {title, originalPrice, resalePrice,  categoryId, condition, loca
             )}
           </div>
 
+   </div>
           <div className="form-control max-w-lg mx-auto ">
             <label className="label ">
               <span className="text-white">Product Description</span>
