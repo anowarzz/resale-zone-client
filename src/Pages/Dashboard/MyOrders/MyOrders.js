@@ -26,7 +26,7 @@ const MyOrders = () => {
 
       
       <div className="mx-auto">
-      <h2 className="text-2xl md:text-4xl font-semibold text-center mb-8">
+      <h2 className="text-2xl md:text-4xl font-semibold text-center my-8">
         My Orders
       </h2>
 

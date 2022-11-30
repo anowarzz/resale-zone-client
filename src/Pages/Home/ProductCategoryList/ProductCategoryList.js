@@ -14,7 +14,6 @@ useEffect( () => {
     .then(data => {
        
         const categories = data.data;
-        console.log(categories);
         setCategories(categories)
     })
 }, [])

@@ -2,8 +2,10 @@ import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 import useRole from "../Hooks/useRole";
+import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
 import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
+import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import Loading from "../Shared/Loading/Loading";
 import DashboardNavbar from "../Shared/Navbar/DashboardNavbar";
 
@@ -25,11 +27,8 @@ if(isRoleLoading){
       <div className="drawer drawer-mobile">
         <input id="dashboardDrawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
-
+          
 <div>
-  {
-    buyerRole && <MyOrders />
-  }
 <Outlet />
 </div>
 
@@ -65,6 +64,10 @@ if(isRoleLoading){
 
                 <li className="border-gray-100 bg-gray-800 shadow-xl text-gray-50 mb-1 hover:bg-sky-500">
                   <Link to="/dashboard/allSellers">All Seller</Link>
+                </li>
+
+                <li className="border-gray-100 bg-gray-800 shadow-xl text-gray-50 mb-1 hover:bg-sky-500">
+                  <Link to="/dashboard/reported">Reported Items</Link>
                 </li>
               </>
             )}

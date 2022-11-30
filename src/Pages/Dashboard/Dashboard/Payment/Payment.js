@@ -1,13 +1,11 @@
 import React from 'react';
-import Navbar from '../../../../Shared/Navbar/Navbar';
+
 
 const Payment = () => {
     return (
         <div>
-<Navbar />
 
-
-<h3>This is the payment route</h3>
+<h3 className='text 2xl md:text-4xl text-center font-semibold my-10'>Complete Your Payment</h3>
         </div>
     );
 };

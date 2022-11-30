@@ -19,8 +19,8 @@ const Register = () => {
   const { createUser, updateUser, googleLogIn, loading, setLoading } = useContext(AuthContext);
 
   const [signUpError, setSignUpError] = useState("");
-  const imageHostKey = process.env.REACT_APP_imgbb_key;
-  const [userImage, setUserImage] = useState("");
+  // const imageHostKey = process.env.REACT_APP_imgbb_key;
+  // const [userImage, setUserImage] = useState("");
 
   const [createdUserEmail, setCreatedUserEmail] = useState('') 
  const [token] = useToken(createdUserEmail)
@@ -45,27 +45,27 @@ setLoading(true)
 
     console.log(data);
 
-    const image = data.image[0];
-    const formData = new FormData();
-    formData.append("image", image);
+  //   const image = data.image[0];
+  //   const formData = new FormData();
+  //   formData.append("image", image);
 
 
 
-  const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+  // const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
 
-  fetch(url, {
-    method: "POST",
-    body: formData,
-  })
-    .then((res) => res.json())
-    .then((imgData) => {
+  // fetch(url, {
+  //   method: "POST",
+  //   body: formData,
+  // })
+  //   .then((res) => res.json())
+  //   .then((imgData) => {
      
-      console.log(imgData);
-      if (imgData.success) {
-        console.log(imgData?.data?.url);
-        setUserImage(imgData?.data.url);
-      }
-    });
+  //     console.log(imgData);
+  //     if (imgData.success) {
+  //       console.log(imgData?.data?.url);
+  //       setUserImage(imgData?.data.url);
+  //     }
+  //   });
 
     createUser(data.email, data.password)
     .then((result) => {
@@ -79,12 +79,12 @@ setLoading(true)
       const userInfo = {
         displayName: data?.name,
         email: data?.email,
-        photoURL: userImage,
+        photoURL: user?.photoURL,
       };
       updateUser(userInfo)
         .then(() => {
           console.log(data);
-          saveUserToDB(data.name, data.email, data.userType, userImage);
+          saveUserToDB(data.name, data.email, data.userType, user?.photoURL);
        
           setLoading(false)
     
@@ -149,7 +149,7 @@ setLoading(true)
     })
       .then((res) => res.json())
       .then((data) => {
-        setCreatedUserEmail(email)
+        // setCreatedUserEmail(email)
       });
   }
   finally{
@@ -225,7 +225,7 @@ setLoading(true)
             </select>
           </div>
 
-          <div className="form-control w-full max-w-xs">
+          {/* <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="label-text">Photo</span>
             </label>
@@ -240,7 +240,7 @@ setLoading(true)
                 {errors.image?.message}
               </p>
             )}
-          </div>
+          </div> */}
 
           <div className="form-control w-full max-w-xs">
             <label className="label">

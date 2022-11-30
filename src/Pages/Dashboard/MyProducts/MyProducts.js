@@ -83,7 +83,7 @@ const MyProducts = () => {
   return (
     <div>
       <h3 className="text-2xl md:text-4xl text-center font-semibold text-gray-800 my-10">
-        My All Products Here {myProducts.length}
+        My All Products
       </h3>
 
       <div className="overflow-x-auto">
@@ -149,16 +149,18 @@ const MyProducts = () => {
           </tbody>
         </table>
       </div>
+
       {deletingProduct && (
         <ConfirmationModal
           title={`Ary You Sure You Want To Delete This Product  ??`}
-          message={`Once you delete  it can not be undone`}
+          message={`Once you delete a product  it can not be undone`}
           successAction={handleDeleteProduct}
           modalData={deletingProduct}
           closeModal={closeModal}
           successButtonName="Delete"
         />
       )}
+
     </div>
   );
 };
