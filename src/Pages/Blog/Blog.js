@@ -1,153 +1,114 @@
 import React from "react";
+import differencePhoto from "../../assets/reac-vue-angular.png";
+import prototype from '../../assets/prototype.png'
 
 const Blog = () => {
   return (
     <div className="w-[98%] mx-auto border-gray-100 pb-12 border mt-8 shadow-lg rounded">
       <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center pt-4 pb-10 ">
-        Node Js And Database Basic Concepts
+        React Concepts
       </h1>
 
       <div className="mt-16  rounded w-[80%] mx-auto p-6">
         <h3 className="text-2xl md:text-3xl p-2 font-bold ">
-          1. What Are The Differences between SQL and NoSQL ??
+          1. What are the different ways to manage a state in a React
+          application?
         </h3>
 
-        <div className="overflow-x-auto mt-8">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>SQL Database</th>
-                <th>NoSQL Database</th>
-              </tr>
-            </thead>
+        <p className="mt-6 text-lg">
+          Every React component has a built-in state. This state is an object
+          which stores the property values that belong to a component. State is
+          able to keep data from different components in-sync because each state
+          update re-renders all relevant components. svg viewer The built-in way
+          that React provides for setting component states is by using
+          setState() and adding “local state” to a class. There are several
+          other ways to manage state​s in React, including the use of:
+        </p>
+        <ul className="list-disc">
+          <li> Hooks</li>
+          <li> React Context API</li>
+          <li> Apollo Link State</li>
+        </ul>
 
-            <tbody>
-              <tr>
-                <td>
-                  SQL Databases follows RELATIONAL DATABASE MANAGEMENT SYSTEM
-                  (RDBMS){" "}
-                </td>
-                <td>
-                  NoSQL Database Does Not Follows RELATIONAL DATABASE MANAGEMENT
-                  SYSTEM
-                </td>
-              </tr>
+        <p className="font-semibold">
+          There are four main types of state you need to properly manage in your
+          React apps:
+        </p>
 
-              <tr className="hover">
-                <td>SQL Database is Vertically Scalable</td>
-                <td>NoSQL Database is Horizontally Scalable </td>
-              </tr>
-
-              <tr>
-                <td>SQL has fixed predefined schema</td>
-                <td>No SQL has dynamic schema</td>
-              </tr>
-              <tr>
-                <td>SQL is not suitable for hierarchical data storage</td>
-                <td>No SQL is best suitable for hierarchical data storage</td>
-              </tr>
-              <tr>
-                <td>SQL can be used for complex large scale queries</td>
-                <td>No SQL is not good for large complex queries</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <ol className="list-decimal">
+          <li>Local state</li>
+          <li>Global state</li>
+          <li>Server state</li>
+          <li>Local state</li>
+          <li>URL state</li>
+        </ol>
       </div>
 
       <div className="mt-16  rounded  w-[80%] mx-auto p-6">
         <h3 className="text-2xl md:text-3xl p-2 font-bold">
-          2. What is JWT, and how does it work?{" "}
+          2. How does prototypical inheritance work?
         </h3>
 
         <p className="mt-6 text-lg">
-          {" "}
-          JWT or JSON Web Token is away for securely transmitting information
-          between parties as a JSON object. JSON Web Token is an open industry
-          standard used to share information between two entities, usually a
-          client (like your app’s frontend) and a server (your app’s
-          backend).They contain JSON objects which have the information that
-          needs to be shared. Each JWT is also signed using cryptography
-          (hashing) to ensure that the JSON contents (also known as JWT claims)
-          cannot be altered by the client or a malicious party.
+          Inheritance is the process by which one object can be based on
+          another. This lets the objects to share each other’s properties.
+          Prototypical inheritance refers to the ability to access object
+          properties from another object. We use a JavaScript prototype to add
+          new properties and methods to an existing object constructor. We can
+          then essentially tell our JS code to inherit properties from a
+          prototype. Prototypical inheritance allows us to reuse the properties
+          or methods from one JavaScript object to another through a reference
+          pointer function.
         </p>
-      </div>
-
-      <div className="mt-16 rounded w-[80%] mx-auto p-6">
-        <h3 className="text-2xl md:text-3xl p-2 font-bold ">
-          3. What is the difference between Javascript and NodeJS?
-        </h3>
-
-        <div className="overflow-x-auto mt-8">
-          <table className="table w-[100%]">
-            <thead>
-              <tr>
-                <th>JavaScript</th>
-                <th>Node Js</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>
-                  JavaScript is an open source, cross platform lightweight <br />
-                  scripting programming language, used in developing dynamic web
-                  applications
-                </td>
-                <td>
-                  Node Js is a JavaScript runtime environment , which allows
-                  JavaScript to run on the server
-                </td>
-              </tr>
-
-              <tr className="hover">
-                <td>
-                  JavaScript is a programming language, works in any proper
-                  browser engine{" "}
-                </td>
-                <td>
-                  Node Js is a JavaScript interpreter with some valuable
-                  libraries
-                </td>
-              </tr>
-
-              <tr>
-                <td>JavaScript is generally used on the client side server</td>
-                <td>Node Js is generally used on the server side</td>
-              </tr>
-
-              <tr>
-                <td>Javascript can run on any engine including V8</td>
-                <td>Node Js is only supported by v8 engine</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        {/* <img src={prototype} alt="" className="max-w-xl"/> */}
       </div>
 
       <div className="mt-16  rounded  w-[80%] mx-auto p-6">
         <h3 className="text-2xl md:text-3xl p-2 font-bold">
-          4. How does NodeJS handle multiple requests at the same time?
+          3. What is a unit test? Why should we write unit tests?
         </h3>
 
         <p className="mt-6 text-lg">
-          NodeJS server uses an EventQueue, which queues incoming client
-          requests and an EventLoop which is an infinite loop that receives
-          requests and processes them. This EventLoop is single threaded and
-          acts as a listener for the EventQueue which processes incoming
-          requests based on FIFO policy. When a new request comes in, NodeJS
-          checks if it requires any blocking IO operations, if not, the
-          EventLoop processes it and sends the response back to the client
-          directly. If yes, then the request is forwarded to the thread manager,
-          which then based on an algorithm, picks up an idle thread from the
-          pool and lets it process the request. After completion of the request
-          processing operation, the thread, returns the response back to the
-          EventLoop which is then forwarded to the client. Thus, even if an
-          incoming request needs blocking IO, the thread pool allows it to run
-          asynchronously in the background without blocking the EventLoop and it
-          gives a seamless experience of NodeJS handling multiple incoming
-          requests concurrently without any persistent delays or bottlenecks.
+          Unit testing is a software development process in which the smallest
+          testable parts of an application, called units, are individually and
+          independently scrutinized for proper operation. This testing
+          methodology is done during the development process by the software
+          developers and sometimes QA staff. The main objective of unit testing
+          is to isolate written code to test and determine if it works as
+          intended. Unit testing is an important step in the development
+          process, because if done correctly, it can help detect early flaws in
+          code which may be more difficult to find in later testing stages.
         </p>
+        <p className="text-lg font-semibold mb-2 mt-4">
+          Advantages to unit testing
+        </p>
+        <ul className="list-disc">
+          <li>
+            The earlier a problem is identified, the fewer compound errors
+            occur.
+          </li>
+          <li>
+            Costs of fixing a problem early can quickly outweigh the cost of
+            fixing it later.
+          </li>
+          <li>Debugging processes are made easier.</li>
+          <li>Developers can quickly make changes to the code base.</li>
+          <li>
+            Developers can also re-use code, migrating it to new projects.
+          </li>
+        </ul>
+      </div>
+
+      <div className="mt-16  rounded  w-[80%] mx-auto p-6">
+        <h3 className="text-2xl md:text-3xl p-2 font-bold">
+          4. React Vs Angular Vs Vue
+        </h3>
+
+        <p className="my-6 text-lg font-semibold">
+          The Differences of React Vs Angular Vs Vue is Described Below with a
+          picture
+        </p>
+        <img src={differencePhoto} alt="" />
       </div>
     </div>
   );
