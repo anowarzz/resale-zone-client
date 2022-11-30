@@ -108,7 +108,7 @@ const MyProducts = () => {
                 <td>
                   <div className="avatar">
                     <div className="w-24 rounded-xl">
-                      <img src={product?.image} alt="doctor" />
+                      <img src={product?.image} alt="product" />
                     </div>
                   </div>
                 </td>

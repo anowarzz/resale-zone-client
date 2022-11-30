@@ -1,8 +1,42 @@
+
 import {  faCheckCircle,faClockFour, faLocationDot, faMarker, } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import swal from 'sweetalert'
+
+
+
 
 const ProductCard = ({product, setBookingProduct}) => {
+
+
+  
+
+  const handleReportProduct = (id) => {
+
+    console.log(id);
+    
+    fetch(`http://localhost:5000/products/report/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        // authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        
+        if (data.modifiedCount > 0) {
+            console.log('clicked');
+            swal("Congratulations", "Product Reported To Admin", "error");
+        }
+      });
+  };
+
+
+  
+
     return (
       <div className="card bg-base-100 shadow-2xl max-w-2xl border-gray-100 border">
       <figure ><img src={product?.image} alt="product" className='h-80' /></figure>
@@ -25,6 +59,16 @@ const ProductCard = ({product, setBookingProduct}) => {
         </p> 
 
         <p className='text-lg my-2'>{product?.description}</p>
+{
+  product.isReported ? 
+  <button 
+disabled
+  className='badge badge-error p-1'>Product Reported</button> :
+  
+  <button 
+  onClick={() => handleReportProduct (product._id)}
+  className='badge badge-warning p-1'>Report to admin</button>
+}
 
         <label
         onClick={() => setBookingProduct(product)}

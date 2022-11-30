@@ -26,7 +26,7 @@ useEffect( () => {
       <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-full md:mb-12">
         <div>
           <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-400">
-            Brand new
+            Resale Zone
           </p>
         </div>
         <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-50 sm:text-4xl md:mx-auto">
@@ -37,8 +37,7 @@ useEffect( () => {
           or Sell your laptop with some easy steps
         </h2>
         <p className="text-base text-white md:text-lg">
-          Sed ut perspiciatis unde omnis iste natus error sit <br className='hidden md:block'/>  voluptatem
-          accusantium doloremque rem aperiam, eaque ipsa quae.
+          Browse and chose your favorite laptop to buy <br className='hidden md:block'/>  Or sell your used laptop easily .
         </p>
       </div>
 

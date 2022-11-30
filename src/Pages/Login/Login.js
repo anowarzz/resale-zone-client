@@ -172,7 +172,7 @@ const Login = () => {
             <p className="text-sm font-bold text-red-500 py-1">{loginError}</p>
           )}
           <input
-            className="btn bg-primary w-full mt-4 hover:btn-secondary"
+            className="btn bg-violet-600 w-full mt-4 hover:bg-blue-500"
             value="Login"
             type="submit"
           />

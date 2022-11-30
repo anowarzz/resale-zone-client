@@ -16,7 +16,7 @@ const HeroSection = () => {
               <p className="mt-6 mb-8 text-lg sm:mb-12 xl:max-w-3xl text-white">
                 Here you can Buy your desired pre-owned laptops at your{" "}
                 <br className="hidden lg:block" /> affordable price or Sell your
-                used laptop easily with just few st
+                used laptop easily with just few steps
               </p>
 			 </div>
 			

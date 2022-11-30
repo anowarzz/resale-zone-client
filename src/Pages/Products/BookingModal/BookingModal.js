@@ -121,7 +121,7 @@ fetch("http://localhost:5000/bookedProducts", {
 
             <br />
             <input disabled={booked} 
-              className="w-full btn bnt-accent hover:btn-info"
+              className="w-full btn bg-gray-800 hover:btn-info"
               type="submit"
               value="Book Product"
             />

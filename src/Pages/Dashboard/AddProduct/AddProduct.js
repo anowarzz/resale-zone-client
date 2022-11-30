@@ -74,7 +74,7 @@ const product = {title, originalPrice, resalePrice,  categoryId, condition, loca
 
 
 
-    //save doctor information to the db
+    //save product information to the db
     fetch("http://localhost:5000/products", {
         method: "POST",
         headers: {
@@ -311,7 +311,7 @@ const product = {title, originalPrice, resalePrice,  categoryId, condition, loca
             <p className="text-sm font-bold text-red-500 py-1">{signUpError}</p>
           )} */}
           <input
-            className="btn bg-primary w-full text-center mt-4 hover:btn-secondary"
+            className="btn bg-blue-600 w-full text-center mt-4 hover:btn-secondary"
             value="Add Product"
             type="submit"
           />

@@ -5,6 +5,9 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
 import Loading from '../../../Shared/Loading/Loading';
+import swal from 'sweetalert'
+
+
 
 const AllSellers = () => {
 
@@ -31,15 +34,25 @@ const AllSellers = () => {
       });
 
 
- 
-    // const [allSellers, setAllSellers] = useState([]);
+   // Function to verify a seller
+   const handleVerifySeller = (id) => {
+    fetch(`http://localhost:5000/users/seller/${id}`, {
+      method: "PUT",
+      headers: {
+        // authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+       if(data.modifiedCount > 0){
+        swal("Congratulations", "This Seller Is Now Verified", "success");
 
-    // useEffect( () => {
-    //   fetch('http://localhost:5000/users/sellers')
-    //   .then(res => res.json())
-    //   .then(data => setAllSellers(data))
-    // }, [])
-    
+        refetch();
+       }
+      });
+  };
+
+
 
   // Delete a Seller from database
   const handleDeleteSeller = (seller) => {
@@ -87,7 +100,11 @@ if(isLoading){
                   <td>{seller?.name}</td>
                   <td>{seller?.email}</td>
                   <td>
-                    <button className="btn btn-success hover:btn-info btn-sm">Verify Seller <span className="pl-1"><FontAwesomeIcon icon={faCheckCircle} /></span> </button>
+                   {
+                    seller?.isSellerVerified ?  <button  className="btn bg-gray-800 hover:bg-gray-400 btn-sm">Verified <span className="pl-1"><FontAwesomeIcon icon={faCheckCircle} /></span> </button> :  
+                    <button onClick={() => handleVerifySeller(seller._id)}  className="btn btn-success hover:btn-info btn-sm">Verify Seller<span className="pl-1"><FontAwesomeIcon icon={faCheckCircle} /></span> </button>
+                   }
+
                   </td>
                   <td>
                     <label
@@ -117,6 +134,6 @@ if(isLoading){
       )} 
         </div>
     );
-};
+}
 
 export default AllSellers;

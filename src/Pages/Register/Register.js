@@ -5,8 +5,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import { toast } from "react-toastify";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useToken from "../../Hooks/useToken";
-import Loading from '../../Shared/Loading/Loading'
-
+import Loading from "../../Shared/Loading/Loading";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -16,93 +15,82 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { createUser, updateUser, googleLogIn, loading, setLoading } = useContext(AuthContext);
+  const { createUser, updateUser, googleLogIn, loading, setLoading } =
+    useContext(AuthContext);
 
   const [signUpError, setSignUpError] = useState("");
   // const imageHostKey = process.env.REACT_APP_imgbb_key;
   // const [userImage, setUserImage] = useState("");
 
-  const [createdUserEmail, setCreatedUserEmail] = useState('') 
- const [token] = useToken(createdUserEmail)
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const [token] = useToken(createdUserEmail);
 
   // location
 
   const navigate = useNavigate();
-  
 
-
-//   if(token){
-//  navigate('/')
-//   }
-
-
+  //   if(token){
+  //  navigate('/')
+  //   }
 
   // Register a  new user using email and password
   const handleRegister = (data, e) => {
     setSignUpError("");
 
-setLoading(true)
-
+    setLoading(true);
     console.log(data);
 
-  //   const image = data.image[0];
-  //   const formData = new FormData();
-  //   formData.append("image", image);
+
+    
 
 
+    //   const image = data.image[0];
+    //   const formData = new FormData();
+    //   formData.append("image", image);
 
-  // const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+    // const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
 
-  // fetch(url, {
-  //   method: "POST",
-  //   body: formData,
-  // })
-  //   .then((res) => res.json())
-  //   .then((imgData) => {
-     
-  //     console.log(imgData);
-  //     if (imgData.success) {
-  //       console.log(imgData?.data?.url);
-  //       setUserImage(imgData?.data.url);
-  //     }
-  //   });
+    // fetch(url, {
+    //   method: "POST",
+    //   body: formData,
+    // })
+    //   .then((res) => res.json())
+    //   .then((imgData) => {
+
+    //     console.log(imgData);
+    //     if (imgData.success) {
+    //       console.log(imgData?.data?.url);
+    //       setUserImage(imgData?.data.url);
+    //     }
+    //   });
 
     createUser(data.email, data.password)
-    .then((result) => {
-      const user = result.user;
-      console.log(user);
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
 
+        e.target.reset();
 
-   
-      e.target.reset();
-
-      const userInfo = {
-        displayName: data?.name,
-        email: data?.email,
-        photoURL: user?.photoURL,
-      };
-      updateUser(userInfo)
-        .then(() => {
-          console.log(data);
-          saveUserToDB(data.name, data.email, data.userType, user?.photoURL);
-          toast.success("SignUp Successful");
-          navigate('/')
-          setLoading(false)
-    
-        })
-        .catch((err) => {
-          console.log(err);
-          setSignUpError(err.message);
-          setLoading(false)
-        });
-  
-    })
-    .catch((error) => console.error(error));
- 
-
-
-
- 
+        const userInfo = {
+          displayName: data?.name,
+          email: data?.email,
+          photoURL: user?.photoURL,
+        };
+        updateUser(userInfo)
+          .then(() => {
+            console.log(data);
+            saveUserToDB(data.name, data.email, data.userType, user?.photoURL);
+            toast.success("SignUp Successful");
+            navigate("/");
+            setLoading(false);
+          })
+          .catch((err) => {
+            console.log(err);
+            setSignUpError(err.message);
+            setLoading(false);
+          });
+      })
+      .catch((error) => console.error(error));
   };
 
   // Register user using google
@@ -119,7 +107,7 @@ setLoading(true)
           photoURL: user?.photoURL,
         };
         updateUser(userInfo);
-        setCreatedUserEmail(user?.email)
+        setCreatedUserEmail(user?.email);
         //sending user info to db
         const name = user?.displayName;
         const email = user?.email;
@@ -127,7 +115,7 @@ setLoading(true)
         const userImg = user?.photoURL;
         saveUserToDB(name, email, userType, userImg);
         toast.success("Register Successful");
-   navigate('/')
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -140,35 +128,28 @@ setLoading(true)
   const saveUserToDB = (name, email, userType, userImg) => {
     const user = { name, email, userType, userImg };
 
-  try{
-    fetch("http://localhost:5000/users", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // setCreatedUserEmail(email)
-      });
-  }
-  finally{
-  }
-
+    try {
+      fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          // setCreatedUserEmail(email)
+        });
+    } finally {
+    }
   };
 
   return (
-
-
-
     <div className="flex flex-col justify-center items-center my-4  bg-white">
       <div className="max-w-96 md:w-auto px-16 py-4 border border-gray-200  shadow-slate-500 shadow-lg bg-slate-200">
         <h2 className="text-2xl md:text-3xl text-center my-6">Register</h2>
 
-        {
-          loading && <Loading />
-        }
+        {loading && <Loading />}
 
         <form onSubmit={handleSubmit(handleRegister)}>
           <div className="form-control w-full max-w-xs">
@@ -274,7 +255,7 @@ setLoading(true)
             <p className="text-sm font-bold text-red-500 py-1">{signUpError}</p>
           )}
           <input
-            className="btn bg-primary w-full mt-4 hover:btn-secondary"
+            className="btn bg-violet-600 w-full mt-4 hover:bg-blue-500"
             value="Register"
             type="submit"
           />
