@@ -60,7 +60,9 @@ const Blog = () => {
           or methods from one JavaScript object to another through a reference
           pointer function.
         </p>
-        {/* <img src={prototype} alt="" className="max-w-xl"/> */}
+<div>
+{/* <img src={prototype} alt="" className="w-48 lg:w-72 mx-auto mt-8"/> */}
+</div>
       </div>
 
       <div className="mt-16  rounded  w-[80%] mx-auto p-6">
@@ -108,7 +110,9 @@ const Blog = () => {
           The Differences of React Vs Angular Vs Vue is Described Below with a
           picture
         </p>
-        <img src={differencePhoto} alt="" />
+   <div>
+   {/* <img src={differencePhoto} alt="" className="max-w-64"/> */}
+   </div>
       </div>
     </div>
   );
