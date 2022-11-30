@@ -30,7 +30,7 @@ const AdvertizedProducts = () => {
           </h3>
 
           <div className="grid grid-cols-1 md-grid-cols-2 lg:grid-cols-3">
-            {advertisedProducts.map((adProduct) => (
+            {advertisedProducts?.map((adProduct) => (
               <AdvertizeCard key={adProduct._id} adProduct={adProduct} />
             ))}
           </div>

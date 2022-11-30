@@ -28,6 +28,9 @@ if(isRoleLoading){
         <input id="dashboardDrawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           
+
+    <h3 className="mt-2 text-2xl text-center"><span className="badge badge-info">Welcome {user?.displayName}</span></h3>
+
 <div>
 <Outlet />
 </div>

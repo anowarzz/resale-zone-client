@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
@@ -12,13 +13,21 @@ const AllBuyers = () => {
     };
 
 
-    const [allBuyers, setAllBuyers] = useState([]);
+    const { data: allBuyers,isLoading, refetch} = useQuery({
+        queryKey: ["buyers",],
+        queryFn: async () => {
+          try {
+            const res = await fetch(`http://localhost:5000/users/buyers`, {
+            //   headers: {
+            //     authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            //   },
+            });
+            const data = await res.json();
+            return data;
+          } catch (error) {}
+        },
+      });
 
-    useEffect( () => {
-      fetch('http://localhost:5000/users/buyers')
-      .then(res => res.json())
-      .then(data => setAllBuyers(data))
-    }, [])
     
 
 
@@ -26,7 +35,7 @@ const AllBuyers = () => {
   // Delete a product from database
   const handleDeleteBuyer = (buyer) => {
     const id = buyer._id;
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`http://localhost:5000/users/buyer/${id}`, {
       method: "DELETE",
       headers: {
         // authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -37,7 +46,7 @@ const AllBuyers = () => {
         console.log(data);
         if (data.deletedCount > 0) {
           toast.success(`Buyer ${buyer?.name} deleted successfully`);
-
+        refetch();
         }
       });
     }
@@ -61,7 +70,7 @@ const AllBuyers = () => {
               </tr>
             </thead>
             <tbody>
-              {allBuyers.map((buyer, i) => (
+              {allBuyers?.map((buyer, i) => (
                 <tr key={buyer._id}>
                   <th>{i + 1}</th>
                   <td>{buyer?.name}</td>

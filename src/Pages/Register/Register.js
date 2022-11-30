@@ -31,9 +31,9 @@ const Register = () => {
   
 
 
-  if(token){
- navigate('/')
-  }
+//   if(token){
+//  navigate('/')
+//   }
 
 
 
@@ -72,7 +72,7 @@ setLoading(true)
       const user = result.user;
       console.log(user);
 
-      toast.success("SignUp Successful");
+
    
       e.target.reset();
 
@@ -85,7 +85,8 @@ setLoading(true)
         .then(() => {
           console.log(data);
           saveUserToDB(data.name, data.email, data.userType, user?.photoURL);
-       
+          toast.success("SignUp Successful");
+          navigate('/')
           setLoading(false)
     
         })
@@ -126,7 +127,7 @@ setLoading(true)
         const userImg = user?.photoURL;
         saveUserToDB(name, email, userType, userImg);
         toast.success("Register Successful");
-        // navigate(from, { replace: true });
+   navigate('/')
       })
       .catch((err) => {
         console.log(err);

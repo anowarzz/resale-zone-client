@@ -1,8 +1,10 @@
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
+import Loading from '../../../Shared/Loading/Loading';
 
 const AllSellers = () => {
 
@@ -13,21 +15,36 @@ const AllSellers = () => {
     };
 
  
- 
- 
-    const [allSellers, setAllSellers] = useState([]);
+    const { data: allSellers,isLoading, refetch} = useQuery({
+        queryKey: ["sellers",],
+        queryFn: async () => {
+          try {
+            const res = await fetch(`http://localhost:5000/users/sellers`, {
+            //   headers: {
+            //     authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            //   },
+            });
+            const data = await res.json();
+            return data;
+          } catch (error) {}
+        },
+      });
 
-    useEffect( () => {
-      fetch('http://localhost:5000/users/sellers')
-      .then(res => res.json())
-      .then(data => setAllSellers(data))
-    }, [])
+
+ 
+    // const [allSellers, setAllSellers] = useState([]);
+
+    // useEffect( () => {
+    //   fetch('http://localhost:5000/users/sellers')
+    //   .then(res => res.json())
+    //   .then(data => setAllSellers(data))
+    // }, [])
     
 
   // Delete a Seller from database
   const handleDeleteSeller = (seller) => {
     const id = seller._id;
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`http://localhost:5000/users/seller/${id}`, {
       method: "DELETE",
       headers: {
         // authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -38,13 +55,15 @@ const AllSellers = () => {
         console.log(data);
         if (data.deletedCount > 0) {
           toast.success(`Seller ${seller?.name} deleted successfully`);
-
+            refetch()
         }
       });
     }
 
 
-
+if(isLoading){
+    <Loading />
+}
 
 
     return (
@@ -62,7 +81,7 @@ const AllSellers = () => {
               </tr>
             </thead>
             <tbody>
-              {allSellers.map((seller, i) => (
+              {allSellers?.map((seller, i) => (
                 <tr key={seller._id}>
                   <th>{i + 1}</th>
                   <td>{seller?.name}</td>
