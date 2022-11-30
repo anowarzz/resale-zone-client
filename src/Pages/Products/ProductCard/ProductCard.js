@@ -9,6 +9,7 @@ import swal from 'sweetalert'
 
 const ProductCard = ({product, setBookingProduct}) => {
 
+  
 
   
 
@@ -29,7 +30,7 @@ const ProductCard = ({product, setBookingProduct}) => {
         
         if (data.modifiedCount > 0) {
             console.log('clicked');
-            swal("Congratulations", "Product Reported To Admin", "error");
+            swal("Product Reported To Admin", "error");
         }
       });
   };
