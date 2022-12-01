@@ -1,27 +1,27 @@
 import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
-import useAdmin from '../../Hooks/useAdmin';
+import useSeller from '../../Hooks/useSeller';
 
 
-const AdminRoute = ({children}) => {
+const SellerRoute = ({children}) => {
 
 const {user, loading} = useContext(AuthContext);
-const [isAdmin, isAdminLoading] = useAdmin(user?.email)
+const [isSeller, isSellerLoading] = useSeller(user?.email)
 const location = useLocation();
 
-if(loading || isAdminLoading){
+if(loading || isSellerLoading){
     return <div className='min-h-screen flex justify-center items-center'>
         <progress className="progress w-56"></progress>
     </div>
 }
 
 
-if(user && isAdmin){
+if(user && isSeller){
     return children
 }
     return <Navigate to = '/' state={{from : location}} replace> </Navigate>
 
 };
 
-export default AdminRoute;
+export default SellerRoute;

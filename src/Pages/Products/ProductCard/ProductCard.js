@@ -1,15 +1,20 @@
 
 import {  faCheckCircle,faClockFour, faLocationDot, faMarker, } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useContext } from 'react';
 import swal from 'sweetalert'
+import { AuthContext } from '../../../contexts/AuthProvider';
+import useAdmin from '../../../Hooks/useAdmin';
+import Loading from '../../../Shared/Loading/Loading';
 
 
 
 
 const ProductCard = ({product, setBookingProduct}) => {
 
+const {user} = useContext(AuthContext)
 
+const [isAdmin, isAdminLoading] = useAdmin(user?.email)
   
 
   const handleReportProduct = (id) => {
@@ -34,7 +39,9 @@ const ProductCard = ({product, setBookingProduct}) => {
       });
   };
 
-
+if(isAdminLoading){
+  return <Loading />
+}
   
 
     return (
@@ -70,7 +77,7 @@ disabled
   className='badge badge-warning p-1'>Report to admin</button>
 }
 
-        <label
+        <label disabled = {isAdmin}
         onClick={() => setBookingProduct(product)}
         htmlFor="booking-modal" className='btn btn-success hover:btn-info mt-8'>Book Now</label>
       </div>
