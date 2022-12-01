@@ -22,15 +22,17 @@ const ConfirmationModal = ({
             <p className="py-4">{message}</p>
 
             <div className="modal-action">
-              <label 
-              onClick={() => successAction(modalData)}
+              <label
+                onClick={() => successAction(modalData)}
                 htmlFor="confirmation-modal"
                 className="btn btn-error"
               >
                 {successButtonName}
               </label>
 
-              <button onClick={closeModal}  className="btn btn-info mx-2">Cancel</button>
+              <button onClick={closeModal} className="btn btn-info mx-2">
+                Cancel
+              </button>
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import ConfirmationModal from "../../../Shared/ConfirmationModal/ConfirmationModal";
 import Loading from "../../../Shared/Loading/Loading";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
@@ -15,7 +15,7 @@ const MyProducts = () => {
     setDeletingProduct(null);
   };
 
-  const url = `http://localhost:5000/myProducts?email=${user?.email}`;
+  const url = `https://resale-zone-server.vercel.app/myProducts?email=${user?.email}`;
 
   const {
     data: myProducts = [],
@@ -25,36 +25,36 @@ const MyProducts = () => {
     queryKey: ["myProducts", user?.email],
     queryFn: async () => {
       const res = await fetch(url, {
-        headers : {
-          authorization : `Bearer ${localStorage.getItem('accessToken')}`
-        }
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
       });
       const data = await res.json();
       return data;
     },
   });
 
-
-
   // Advertise a product
   const handleAdvertise = (id) => {
-
-    
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`https://resale-zone-server.vercel.app/products/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        
+
         if (data.modifiedCount > 0) {
-            console.log('clicked');
-            swal("Congratulations", "Product Added to Advertise Section", "success");
-            refetch()
+          console.log("clicked");
+          swal(
+            "Congratulations",
+            "Product Added to Advertise Section",
+            "success"
+          );
+          refetch();
         }
       });
   };
@@ -62,7 +62,7 @@ const MyProducts = () => {
   // Delete a product from database
   const handleDeleteProduct = (product) => {
     const id = product._id;
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`https://resale-zone-server.vercel.app/products/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -118,24 +118,21 @@ const MyProducts = () => {
                   <p className="badge badge-primary">{product?.status}</p>
                 </td>
                 <td>
-
-                    {
-                        product?.isAdvertised ?  <button
-                        onClick={() => handleAdvertise(product._id)}
-                    
-                        className="btn btn-sm btn-success hover:btn-info"
-                      >
-                        Already Advertised
-                      </button> :
-                       <button
-                       onClick={() => handleAdvertise(product._id)}
-                 
-                       className="btn btn-sm btn-info hover:btn-success"
-                     >
-                       Advertise
-                     </button>
-                    }
-                 
+                  {product?.isAdvertised ? (
+                    <button
+                      onClick={() => handleAdvertise(product._id)}
+                      className="btn btn-sm btn-success hover:btn-info"
+                    >
+                      Already Advertised
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleAdvertise(product._id)}
+                      className="btn btn-sm btn-info hover:btn-success"
+                    >
+                      Advertise
+                    </button>
+                  )}
                 </td>
                 <td>
                   <label
@@ -162,7 +159,6 @@ const MyProducts = () => {
           successButtonName="Delete"
         />
       )}
-
     </div>
   );
 };

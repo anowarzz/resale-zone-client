@@ -1,4 +1,3 @@
-
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -6,23 +5,29 @@ import ConfirmationModal from "../../../Shared/ConfirmationModal/ConfirmationMod
 import Loading from "../../../Shared/Loading/Loading";
 
 const ReportedItems = () => {
-
   const [deletingItem, setDeletingItem] = useState(null);
 
   const closeModal = () => {
     setDeletingItem(null);
   };
 
-
-//   Loading reported items from database
-  const { data: reportedItems, isLoading, refetch } = useQuery({
+  //   Loading reported items from database
+  const {
+    data: reportedItems,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["products/reported"],
     queryFn: async () => {
       try {
-        const res = await fetch("http://localhost:5000/products/reported", {
+        const res = await fetch(
+          "https://resale-zone-server.vercel.app/products/reported",
+          {
             headers: {
-              authorization: `Bearer ${localStorage.getItem("accessToken")}`, }
-        });
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        );
         const data = await res.json();
         return data;
       } catch (error) {}
@@ -32,7 +37,7 @@ const ReportedItems = () => {
   //   Deleting a reported product
   const handleDeleteProduct = (product) => {
     const id = product._id;
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`https://resale-zone-server.vercel.app/products/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -48,8 +53,8 @@ const ReportedItems = () => {
       });
   };
 
-  if(isLoading){
-    return <Loading />
+  if (isLoading) {
+    return <Loading />;
   }
 
   return (

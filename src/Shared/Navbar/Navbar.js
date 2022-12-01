@@ -2,20 +2,16 @@ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import logo from "../../assets/cart-logo2.jpg";
-import useRole from '../../Hooks/useRole'
-
+import useRole from "../../Hooks/useRole";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
 
-const [buyerRole, sellerRole, amdinRole] = useRole(user?.email)
-
-
+  const [buyerRole, sellerRole, amdinRole] = useRole(user?.email);
 
   const handleLogOut = () => {
     logOut()
-      .then(() => {
-      })
+      .then(() => {})
       .catch((err) => console.log(err));
   };
 
@@ -41,7 +37,7 @@ const [buyerRole, sellerRole, amdinRole] = useRole(user?.email)
           Blog
         </NavLink>
       </li>
-    
+
       {user?.uid ? (
         <>
           <li>
@@ -56,8 +52,7 @@ const [buyerRole, sellerRole, amdinRole] = useRole(user?.email)
               Dashboard
             </NavLink>
           </li>
-          {
-          user?.photoURL && (
+          {user?.photoURL && (
             <>
               <img
                 alt=""
@@ -67,11 +62,13 @@ const [buyerRole, sellerRole, amdinRole] = useRole(user?.email)
                 title={user?.displayName}
               />
             </>
-          )
-          }
+          )}
 
           <li>
-            <button onClick={handleLogOut} className="btn-sm mt-2 items-center text-white py-0 bg-Red ml-2 hover:bg-info">
+            <button
+              onClick={handleLogOut}
+              className="btn-sm mt-2 items-center text-white py-0 bg-Red ml-2 hover:bg-info"
+            >
               Log Out
             </button>
           </li>

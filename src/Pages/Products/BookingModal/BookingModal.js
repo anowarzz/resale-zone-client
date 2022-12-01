@@ -45,7 +45,7 @@ const bookedProduct = {
 
 
 
-fetch("http://localhost:5000/bookedProducts", {
+fetch("https://resale-zone-server.vercel.app/bookedProducts", {
     method: "POST",
     headers: {
       "content-type": "application/json",

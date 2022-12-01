@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         ),
         loader: async ({ params }) => {
           const res = await fetch(
-            `http://localhost:5000/categoryProducts?id=${params.id}`,
+            `https://resale-zone-server.vercel.app/categoryProducts?id=${params.id}`,
             {
               headers: {
                 authorization: `Bearer ${localStorage.getItem("accessToken")}`,

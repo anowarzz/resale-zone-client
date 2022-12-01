@@ -10,7 +10,7 @@ const ProductCategoryList = () => {
 const [categories, setCategories] = useState();
 
 useEffect( () => {
-    axios.get('http://localhost:5000/categories')
+    axios.get('https://resale-zone-server.vercel.app/categories')
     .then(data => {
        
         const categories = data.data;

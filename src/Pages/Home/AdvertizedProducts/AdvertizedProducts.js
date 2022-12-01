@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import Loading from "../../../Shared/Loading/Loading";
 import AdvertizeCard from "./AdvertizeCard";
 
 const AdvertizedProducts = () => {
-  const url = `http://localhost:5000/advertisedProducts`;
+  const url = `https://resale-zone-server.vercel.app/advertisedProducts`;
   const {
     data: advertisedProducts = [],
     isLoading,
@@ -12,16 +13,18 @@ const AdvertizedProducts = () => {
     queryKey: ["advertisedProducts", true],
     queryFn: async () => {
       const res = await fetch(url, {
-        headers : {
-            authorization : `Bearer ${localStorage.getItem('accessToken')}`
-        }
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
       });
       const data = await res.json();
       return data;
     },
   });
 
-
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>

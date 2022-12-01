@@ -5,7 +5,7 @@ import { AuthContext } from '../../contexts/AuthProvider';
 import { toast } from 'react-toastify';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
-import useToken from '../../Hooks/useToken';
+
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -50,7 +50,7 @@ const Login = () => {
 
 
     // Get Jwt token
-    fetch("http://localhost:5000/jwt", {
+    fetch("https://resale-zone-server.vercel.app/jwt", {
       method: "POST",
       headers: {
         'content-type': 'application/json',
@@ -86,6 +86,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        setLoading(true)
  
         // saving user info to firebase
         const userInfo = {
@@ -94,7 +95,7 @@ const Login = () => {
           photoURL: user?.photoURL,
         };
         updateUser(userInfo);
-        setLoading(true)
+    
 
         // saving user to db
         const name = user?.displayName;
@@ -110,7 +111,7 @@ const Login = () => {
      
 
         // Get Jwt token
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://resale-zone-server.vercel.app/jwt", {
           method: "POST",
           headers: {
             'content-type': 'application/json',
@@ -142,7 +143,7 @@ const Login = () => {
     const user = { name, email, userType, userImg };
 
  try{
-  fetch("http://localhost:5000/users", {
+  fetch("https://resale-zone-server.vercel.app/users", {
     method: "POST",
     headers: {
       "content-type": "application/json",  
@@ -154,10 +155,12 @@ const Login = () => {
     });
  }
  finally{
+}
+}
 
- }
-
-    }
+if(loading){
+  <Loading />
+}
 
 
   return (
@@ -165,9 +168,6 @@ const Login = () => {
     <div className="max-w-96 md:w-auto px-16 py-4 border border-gray-200  shadow-slate-500 shadow-lg bg-slate-200">
       <h2 className="text-2xl md:text-3xl text-center my-6">Login</h2>
 
-      {
-          loading && <Loading />
-        }
 
       <form onSubmit={handleSubmit(handleLogin)}>
           <div className="form-control w-full max-w-xs">

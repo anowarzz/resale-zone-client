@@ -74,7 +74,7 @@ const Register = () => {
             };
 
             // Get Jwt token
-            fetch("http://localhost:5000/jwt", {
+            fetch("https://resale-zone-server.vercel.app/jwt", {
               method: "POST",
               headers: {
                 "content-type": "application/json",
@@ -128,7 +128,7 @@ const Register = () => {
         };
 
         // Get Jwt token
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://resale-zone-server.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -159,7 +159,7 @@ const Register = () => {
     const user = { name, email, userType, userImg };
 
     try {
-      fetch("http://localhost:5000/users", {
+      fetch("https://resale-zone-server.vercel.app/users", {
         method: "POST",
         headers: {
           "content-type": "application/json",

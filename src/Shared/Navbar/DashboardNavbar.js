@@ -3,7 +3,6 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import logo from "../../assets/cart-logo2.jpg";
 
-
 const DashboardNavbar = () => {
   const { user, logOut } = useContext(AuthContext);
 
@@ -52,8 +51,7 @@ const DashboardNavbar = () => {
               Dashboard
             </NavLink>
           </li>
-          {
-          user?.photoURL && (
+          {user?.photoURL && (
             <>
               <img
                 alt=""
@@ -63,11 +61,13 @@ const DashboardNavbar = () => {
                 title={user?.displayName}
               />
             </>
-          )
-          }
+          )}
 
           <li>
-            <button onClick={handleLogOut} className="btn-sm mt-2  bg-Red ml-2 hover:bg-info">
+            <button
+              onClick={handleLogOut}
+              className="btn-sm mt-2  bg-Red ml-2 hover:bg-info"
+            >
               Log Out
             </button>
           </li>
@@ -129,22 +129,26 @@ const DashboardNavbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
       </div>
-      <label htmlFor="dashboardDrawer" tabIndex={2} className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </label>
+      <label
+        htmlFor="dashboardDrawer"
+        tabIndex={2}
+        className="btn btn-ghost lg:hidden"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M4 6h16M4 12h8m-8 6h16"
+          />
+        </svg>
+      </label>
     </div>
   );
 };
