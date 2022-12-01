@@ -1,5 +1,6 @@
 import React from 'react';
 import AdvertizedProducts from '../AdvertizedProducts/AdvertizedProducts';
+import DisplaySection from '../DisplaySection/DisplaySection';
 import HeroSection from '../HeroSection/HeroSection';
 import ProductCategoryList from '../ProductCategoryList/ProductCategoryList';
 
@@ -10,6 +11,7 @@ const Home = () => {
         <div>
             <HeroSection />
             <AdvertizedProducts />
+            <DisplaySection />
             <ProductCategoryList />
         </div>
     );

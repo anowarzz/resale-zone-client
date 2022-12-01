@@ -5,9 +5,6 @@ import prototype from '../../assets/prototype.png'
 const Blog = () => {
   return (
     <div className="w-[98%] mx-auto border-gray-100 pb-12 border mt-8 shadow-lg rounded">
-      <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center pt-4 pb-10 ">
-        React Concepts
-      </h1>
 
       <div className="mt-16  rounded w-[80%] mx-auto p-6">
         <h3 className="text-2xl md:text-3xl p-2 font-bold ">
@@ -61,7 +58,7 @@ const Blog = () => {
           pointer function.
         </p>
 <div>
-{/* <img src={prototype} alt="" className="w-48 lg:w-72 mx-auto mt-8"/> */}
+<img src={prototype} alt="" className="max-w-72 mx-auto mt-8"/>
 </div>
       </div>
 
@@ -111,7 +108,7 @@ const Blog = () => {
           picture
         </p>
    <div>
-   {/* <img src={differencePhoto} alt="" className="max-w-64"/> */}
+   <img src={differencePhoto} alt="" className="max-w-72"/>
    </div>
       </div>
     </div>

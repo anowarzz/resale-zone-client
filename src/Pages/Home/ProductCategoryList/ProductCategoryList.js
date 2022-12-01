@@ -30,15 +30,9 @@ useEffect( () => {
           </p>
         </div>
         <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-50 sm:text-4xl md:mx-auto">
-          <span className="relative inline-block">
-           
-            <span className="relative pr-2">Buy</span>
-          </span>
-          or Sell your laptop with some easy steps
+       Browse Your Favorite Laptop Brands
         </h2>
-        <p className="text-base text-white md:text-lg">
-          Browse and chose your favorite laptop to buy <br className='hidden md:block'/>  Or sell your used laptop easily .
-        </p>
+      
       </div>
 
       <div className="grid gap-4 row-gap-5 sm:grid-cols-2 lg:grid-cols-3">
