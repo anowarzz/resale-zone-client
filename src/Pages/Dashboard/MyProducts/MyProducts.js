@@ -25,7 +25,9 @@ const MyProducts = () => {
     queryKey: ["myProducts", user?.email],
     queryFn: async () => {
       const res = await fetch(url, {
-        //   authorization : `Bearer ${localStorage.getItem('accessToken')}`
+        headers : {
+          authorization : `Bearer ${localStorage.getItem('accessToken')}`
+        }
       });
       const data = await res.json();
       return data;
@@ -42,7 +44,7 @@ const MyProducts = () => {
       method: "PUT",
       headers: {
         "content-type": "application/json",
-        // authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`
       },
     })
       .then((res) => res.json())
@@ -63,7 +65,7 @@ const MyProducts = () => {
     fetch(`http://localhost:5000/products/${id}`, {
       method: "DELETE",
       headers: {
-        // authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((res) => res.json())

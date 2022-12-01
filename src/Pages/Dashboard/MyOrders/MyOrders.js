@@ -13,9 +13,9 @@ const MyOrders = () => {
     queryKey: ['orders', user?.email],
     queryFn: async () => {
       const res = await fetch(url, {
-        //   headers: {
-        //       authorization : `Bearer ${localStorage.getItem('accessToken')}`
-        //   }
+          headers: {
+              authorization : `Bearer ${localStorage.getItem('accessToken')}`
+          }
       });
       const data = await res.json();
       return data;
@@ -31,7 +31,7 @@ const MyOrders = () => {
       </h2>
 
       {
-        myOrders.length < 1 && <>
+        myOrders?.length < 1 && <>
         <h3 className="text-center text-blue-500 text-lg font-semibold mt-10">You Have Not Placed Any Order Yet
             </h3>
             </>

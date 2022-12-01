@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../contexts/AuthProvider';
 import { toast } from 'react-toastify';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import useToken from '../../Hooks/useToken';
 import Loading from '../../Shared/Loading/Loading';
+import useToken from '../../Hooks/useToken';
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -14,10 +14,12 @@ const Login = () => {
 
 
   const {register,handleSubmit,formState: { errors },} = useForm();
+
   const { signIn, googleLogIn, updateUser, loading, setLoading } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
-  const [loginUserEmail, setLoginUserEmail] = useState("");
-  const [token] = useToken(loginUserEmail);
+
+
+
 
 
   // location
@@ -25,9 +27,6 @@ const Login = () => {
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
 
-  if (token) {
-    navigate(from, { replace: true });
-  }
 
 
   // Login user using email and password
@@ -42,12 +41,36 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-  //  setLoginUserEmail(data.email)
+
+
+        const currentUser = {
+          email: user?.email,
+        };
+
+
+
+    // Get Jwt token
+    fetch("http://localhost:5000/jwt", {
+      method: "POST",
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(currentUser),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        // Storing Jwt in local storage
+        localStorage.setItem("accessToken", data.accessToken);
+        
         toast.success("Login Successful");
         navigate(from, { replace: true });
         e.target.reset();
+        setLoginError('')
         setLoading(false)
-      })
+       })
+       })
+
       .catch((err) => {
         console.log(err);
         setLoginError(err.message);
@@ -55,7 +78,9 @@ const Login = () => {
       });
   };
 
-  // SignUp user using google
+
+
+  // SignIn user using google
   const handleGoogleLogin = () => {
     googleLogIn(googleProvider)
       .then((result) => {
@@ -77,10 +102,34 @@ const Login = () => {
         const userType = "buyer";
         const userImg = user?.photoURL;
         saveUserToDB(name, email, userType, userImg);
-        toast.success("Login Successful");
-        setLoading(false)
-        navigate(from, { replace: true });
+    
  
+        const currentUser = {
+          email: user?.email,
+        };
+     
+
+        // Get Jwt token
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            // Storing Jwt in local storage
+            localStorage.setItem("accessToken", data.accessToken);
+            setLoginError("");
+            setLoading(false);
+            navigate(from, { replace: true });
+            toast.success("Login Successful");
+          });
+
+
+
       })
       .catch((err) => {
         console.log(err);
@@ -102,7 +151,6 @@ const Login = () => {
   })
     .then((res) => res.json())
     .then((data) => {
-      setLoginUserEmail(email)
     });
  }
  finally{

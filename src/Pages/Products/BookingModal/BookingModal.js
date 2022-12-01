@@ -49,6 +49,7 @@ fetch("http://localhost:5000/bookedProducts", {
     method: "POST",
     headers: {
       "content-type": "application/json",
+      authorization: `Bearer ${localStorage.getItem('accessToken')}`
     },
     body: JSON.stringify(bookedProduct),
   })

@@ -12,7 +12,9 @@ const AdvertizedProducts = () => {
     queryKey: ["advertisedProducts", true],
     queryFn: async () => {
       const res = await fetch(url, {
-        //   authorization : `Bearer ${localStorage.getItem('accessToken')}`
+        headers : {
+            authorization : `Bearer ${localStorage.getItem('accessToken')}`
+        }
       });
       const data = await res.json();
       return data;

@@ -25,7 +25,7 @@ const [isAdmin, isAdminLoading] = useAdmin(user?.email)
       method: "PUT",
       headers: {
         "content-type": "application/json",
-        // authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`
       },
     })
       .then((res) => res.json())

@@ -79,7 +79,7 @@ const product = {title, originalPrice, resalePrice,  categoryId, condition, loca
         method: "POST",
         headers: {
           "content-type": "application/json",
-        //   authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
         body: JSON.stringify(product),
       })
@@ -99,13 +99,14 @@ const product = {title, originalPrice, resalePrice,  categoryId, condition, loca
     
 }
 
+if(loading){
+  <Loading />
+}
 
     return (
         <div>
           
-          {
-          loading && <Loading />
-        }
+
 
         <div>
             <h2 className="text-2xl md:text-4xl font-semibold text-center my-10">

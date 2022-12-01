@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { toast } from "react-toastify";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import useToken from "../../Hooks/useToken";
 import Loading from "../../Shared/Loading/Loading";
 
 const googleProvider = new GoogleAuthProvider();
@@ -22,16 +21,9 @@ const Register = () => {
   // const imageHostKey = process.env.REACT_APP_imgbb_key;
   // const [userImage, setUserImage] = useState("");
 
-  const [createdUserEmail, setCreatedUserEmail] = useState("");
-  const [token] = useToken(createdUserEmail);
-
   // location
 
   const navigate = useNavigate();
-
-  //   if(token){
-  //  navigate('/')
-  //   }
 
   // Register a  new user using email and password
   const handleRegister = (data, e) => {
@@ -39,10 +31,6 @@ const Register = () => {
 
     setLoading(true);
     console.log(data);
-
-
-    
-
 
     //   const image = data.image[0];
     //   const formData = new FormData();
@@ -80,9 +68,29 @@ const Register = () => {
           .then(() => {
             console.log(data);
             saveUserToDB(data.name, data.email, data.userType, user?.photoURL);
-            toast.success("SignUp Successful");
-            navigate("/");
-            setLoading(false);
+
+            const currentUser = {
+              email: user?.email,
+            };
+
+            // Get Jwt token
+            fetch("http://localhost:5000/jwt", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(currentUser),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+                // Storing Jwt in local storage
+                localStorage.setItem("accessToken", data.accessToken);
+                setSignUpError("");
+                setLoading(false);
+                navigate("/");
+                toast.success("Register Successful");
+              });
           })
           .catch((err) => {
             console.log(err);
@@ -107,16 +115,38 @@ const Register = () => {
           photoURL: user?.photoURL,
         };
         updateUser(userInfo);
-        setCreatedUserEmail(user?.email);
+        setLoading(true);
         //sending user info to db
         const name = user?.displayName;
         const email = user?.email;
         const userType = "buyer";
         const userImg = user?.photoURL;
         saveUserToDB(name, email, userType, userImg);
-        toast.success("Register Successful");
-        navigate("/");
+
+        const currentUser = {
+          email: user?.email,
+        };
+
+        // Get Jwt token
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            // Storing Jwt in local storage
+            localStorage.setItem("accessToken", data.accessToken);
+            setSignUpError("");
+            setLoading(false);
+            navigate("/");
+            toast.success("Register Successful");
+          });
       })
+
       .catch((err) => {
         console.log(err);
         setSignUpError(err);
@@ -137,9 +167,7 @@ const Register = () => {
         body: JSON.stringify(user),
       })
         .then((res) => res.json())
-        .then((data) => {
-          // setCreatedUserEmail(email)
-        });
+        .then((data) => {});
     } finally {
     }
   };

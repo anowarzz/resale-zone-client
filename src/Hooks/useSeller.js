@@ -6,10 +6,10 @@ const useSeller = (email) => {
 
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:5000/users/admin/${email}`)
+      fetch(`http://localhost:5000/users/seller/${email}`)
         .then((res) => res.json())
         .then((data) => {
-          setIsSeller(data.isAdmin);
+          setIsSeller(data.isSeller);
           setIsSellerLoading(false);
         });
     }

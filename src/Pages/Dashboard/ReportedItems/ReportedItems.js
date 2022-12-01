@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ConfirmationModal from "../../../Shared/ConfirmationModal/ConfirmationModal";
+import Loading from "../../../Shared/Loading/Loading";
 
 const ReportedItems = () => {
 
@@ -14,13 +15,13 @@ const ReportedItems = () => {
 
 
 //   Loading reported items from database
-  const { data: reportedItems, refetch } = useQuery({
+  const { data: reportedItems, isLoading, refetch } = useQuery({
     queryKey: ["products/reported"],
     queryFn: async () => {
       try {
         const res = await fetch("http://localhost:5000/products/reported", {
-          //   headers: {
-          //     authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`, }
         });
         const data = await res.json();
         return data;
@@ -34,7 +35,7 @@ const ReportedItems = () => {
     fetch(`http://localhost:5000/products/${id}`, {
       method: "DELETE",
       headers: {
-        // authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((res) => res.json())
@@ -47,7 +48,9 @@ const ReportedItems = () => {
       });
   };
 
-  console.log(reportedItems);
+  if(isLoading){
+    return <Loading />
+  }
 
   return (
     <div>

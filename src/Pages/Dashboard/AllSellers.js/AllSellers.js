@@ -23,9 +23,9 @@ const AllSellers = () => {
         queryFn: async () => {
           try {
             const res = await fetch(`http://localhost:5000/users/sellers`, {
-            //   headers: {
-            //     authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            //   },
+              headers: {
+                authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              },
             });
             const data = await res.json();
             return data;
@@ -39,7 +39,7 @@ const AllSellers = () => {
     fetch(`http://localhost:5000/users/seller/${id}`, {
       method: "PUT",
       headers: {
-        // authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`
       }
     })
       .then((res) => res.json())
@@ -60,7 +60,7 @@ const AllSellers = () => {
     fetch(`http://localhost:5000/users/seller/${id}`, {
       method: "DELETE",
       headers: {
-        // authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((res) => res.json())

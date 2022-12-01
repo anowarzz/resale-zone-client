@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
+import Loading from '../../../Shared/Loading/Loading';
 
 const AllBuyers = () => {
 
@@ -18,9 +19,9 @@ const AllBuyers = () => {
         queryFn: async () => {
           try {
             const res = await fetch(`http://localhost:5000/users/buyers`, {
-            //   headers: {
-            //     authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            //   },
+              headers: {
+                authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              },
             });
             const data = await res.json();
             return data;
@@ -38,7 +39,7 @@ const AllBuyers = () => {
     fetch(`http://localhost:5000/users/buyer/${id}`, {
       method: "DELETE",
       headers: {
-        // authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((res) => res.json())
@@ -51,6 +52,9 @@ const AllBuyers = () => {
       });
     }
 
+    if(isLoading){
+      return <Loading />
+    }
 
 
     return (
