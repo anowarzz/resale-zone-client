@@ -20,7 +20,7 @@ const navigate  = useNavigate();
 
 
 const handleAddProduct = (data, e) => {
-
+  setLoading(true)
 
 
 
@@ -40,7 +40,7 @@ const totalUsedTime = thisYear - data?.purchaseYear
     formData.append("image", image);
 
   const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
-  setLoading(true)
+ 
   fetch(url, {
     method: "POST",
     body: formData,
@@ -106,7 +106,9 @@ if(loading){
     return (
         <div>
           
-
+{
+  loading && <Loading />
+}
 
         <div>
             <h2 className="text-2xl md:text-4xl font-semibold text-center my-10">

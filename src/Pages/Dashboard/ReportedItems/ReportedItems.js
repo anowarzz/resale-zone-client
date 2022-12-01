@@ -63,42 +63,46 @@ const ReportedItems = () => {
         All Reported Items here
       </h2>
 
-      <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Product</th>
-              <th>Photo</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reportedItems?.map((reported, i) => (
-              <tr key={reported._id}>
-                <th>{i + 1}</th>
-                <td className="text-lg font-bold">{reported?.title}</td>
-                <td>
-                  <div className="avatar">
-                    <div className="w-16 rounded-xl">
-                      <img src={reported?.image} alt="product" />
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <label
-                    htmlFor="confirmation-modal"
-                    onClick={() => setDeletingItem(reported)}
-                    className="btn btn-error btn-sm hover:bg-Red hover:border border-transparent"
-                  >
-                    Delete
-                  </label>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+   {
+    reportedItems?.length > 0 ?    <div className="overflow-x-auto">
+    <table className="table table-zebra w-full">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Product</th>
+          <th>Photo</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {reportedItems?.map((reported, i) => (
+          <tr key={reported._id}>
+            <th>{i + 1}</th>
+            <td className="text-lg font-bold">{reported?.title}</td>
+            <td>
+              <div className="avatar">
+                <div className="w-16 rounded-xl">
+                  <img src={reported?.image} alt="product" />
+                </div>
+              </div>
+            </td>
+            <td>
+              <label
+                htmlFor="confirmation-modal"
+                onClick={() => setDeletingItem(reported)}
+                className="btn btn-error btn-sm hover:bg-Red hover:border border-transparent"
+              >
+                Delete
+              </label>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  :
+  <p className="text-2xl md:text-3xl text-center font-semibold text-sky-500">No Reported Items </p>
+   }
       {deletingItem && (
         <ConfirmationModal
           title={`Ary You Sure You Want To Delete This Product  ??`}

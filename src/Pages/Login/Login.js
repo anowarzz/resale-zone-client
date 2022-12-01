@@ -15,11 +15,12 @@ const Login = () => {
 
   const {register,handleSubmit,formState: { errors },} = useForm();
 
-  const { signIn, googleLogIn, updateUser, loading, setLoading } = useContext(AuthContext);
+  const { signIn, googleLogIn, updateUser} = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
 
 
 
+const [loading, setLoading] = useState(false)
 
 
   // location
@@ -134,7 +135,7 @@ const Login = () => {
       })
       .catch((err) => {
         console.log(err);
-        setLoginError(err);
+        setLoginError(err.message);
       });
   };
 
@@ -165,6 +166,9 @@ if(loading){
 
   return (
     <div className="flex flex-col justify-center items-center mb-4">
+      {
+        loading && <Loading />
+      }
     <div className="max-w-96 md:w-auto px-16 py-4 border border-gray-200  shadow-slate-500 shadow-lg bg-slate-200">
       <h2 className="text-2xl md:text-3xl text-center my-6">Login</h2>
 

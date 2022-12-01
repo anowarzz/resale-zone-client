@@ -86,7 +86,6 @@ const Register = () => {
                 console.log(data);
                 // Storing Jwt in local storage
                 localStorage.setItem("accessToken", data.accessToken);
-                setSignUpError("");
                 setLoading(false);
                 navigate("/");
                 toast.success("Register Successful");
@@ -94,11 +93,14 @@ const Register = () => {
           })
           .catch((err) => {
             console.log(err);
-            setSignUpError(err.message);
+            setSignUpError(err);
             setLoading(false);
           });
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error)
+        setSignUpError(error)
+      });
   };
 
   // Register user using google
@@ -149,7 +151,8 @@ const Register = () => {
 
       .catch((err) => {
         console.log(err);
-        setSignUpError(err);
+        setLoading(false)
+        setSignUpError(err.message);
       });
   };
 

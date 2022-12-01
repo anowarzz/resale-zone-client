@@ -82,58 +82,65 @@ const AllSellers = () => {
       <h2 className="text-center font-semibold text-2xl md:text-4xl my-8">
         All Sellers
       </h2>
-      <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Verify</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allSellers?.map((seller, i) => (
-              <tr key={seller._id}>
-                <th>{i + 1}</th>
-                <td>{seller?.name}</td>
-                <td>{seller?.email}</td>
-                <td>
-                  {seller?.isSellerVerified ? (
-                    <button className="btn bg-gray-800 hover:bg-gray-400 btn-sm">
-                      Verified{" "}
-                      <span className="pl-1">
-                        <FontAwesomeIcon icon={faCheckCircle} />
-                      </span>{" "}
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => handleVerifySeller(seller._id)}
-                      className="btn btn-success hover:btn-info btn-sm"
-                    >
-                      Verify Seller
-                      <span className="pl-1">
-                        <FontAwesomeIcon icon={faCheckCircle} />
-                      </span>{" "}
-                    </button>
-                  )}
-                </td>
-                <td>
-                  <label
-                    htmlFor="confirmation-modal"
-                    onClick={() => setDeletingSeller(seller)}
-                    className="btn btn-error btn-sm hover:bg-Red hover:border border-transparent"
-                  >
-                    Delete
-                  </label>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      
+      {
+        isLoading && <Loading />
+      }
 
+      
+      <div className="overflow-x-auto">
+      <table className="table table-zebra w-full">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Verify</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {allSellers?.map((seller, i) => (
+            <tr key={seller._id}>
+              <th>{i + 1}</th>
+              <td>{seller?.name}</td>
+              <td>{seller?.email}</td>
+              <td>
+                {seller?.isSellerVerified ? (
+                  <button className="btn bg-gray-800 hover:bg-gray-400 btn-sm">
+                    Verified{" "}
+                    <span className="pl-1">
+                      <FontAwesomeIcon icon={faCheckCircle} />
+                    </span>{" "}
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => handleVerifySeller(seller._id)}
+                    className="btn btn-success hover:btn-info btn-sm"
+                  >
+                    Verify Seller
+                    <span className="pl-1">
+                      <FontAwesomeIcon icon={faCheckCircle} />
+                    </span>{" "}
+                  </button>
+                )}
+              </td>
+              <td>
+                <label
+                  htmlFor="confirmation-modal"
+                  onClick={() => setDeletingSeller(seller)}
+                  className="btn btn-error btn-sm hover:bg-Red hover:border border-transparent"
+                >
+                  Delete
+                </label>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div> 
+
+  
       {deletingSeller && (
         <ConfirmationModal
           title={`Ary You Sure You Want To Delete This Seller??`}

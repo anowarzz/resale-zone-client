@@ -62,36 +62,39 @@ const AllBuyers = () => {
         All Buyers
       </h2>
 
-      <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Action</th>
+     {
+      allBuyers?.length > 0 ?  <div className="overflow-x-auto">
+      <table className="table table-zebra w-full">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {allBuyers?.map((buyer, i) => (
+            <tr key={buyer._id}>
+              <th>{i + 1}</th>
+              <td>{buyer?.name}</td>
+              <td>{buyer?.email}</td>
+              <td>
+                <label
+                  htmlFor="confirmation-modal"
+                  onClick={() => setDeletingBuyer(buyer)}
+                  className="btn btn-error btn-sm hover:bg-Red hover:border border-transparent"
+                >
+                  Delete
+                </label>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {allBuyers?.map((buyer, i) => (
-              <tr key={buyer._id}>
-                <th>{i + 1}</th>
-                <td>{buyer?.name}</td>
-                <td>{buyer?.email}</td>
-                <td>
-                  <label
-                    htmlFor="confirmation-modal"
-                    onClick={() => setDeletingBuyer(buyer)}
-                    className="btn btn-error btn-sm hover:bg-Red hover:border border-transparent"
-                  >
-                    Delete
-                  </label>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
+    </div> : 
+    <p className="text-2xl md:text-3xl font-semibold text-center text-sky-500">No Buyer Available</p>
+     }
 
       {deletingBuyer && (
         <ConfirmationModal

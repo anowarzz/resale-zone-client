@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import Loading from "../../../Shared/Loading/Loading";
-import DashboardNavbar from "../../../Shared/Navbar/DashboardNavbar";
 import MyOrderCard from "./MyOrderCard";
 
 const MyOrders = () => {
@@ -33,19 +32,26 @@ const MyOrders = () => {
         My Orders
       </h2>
 
-      {myOrders?.length < 1 && (
-        <>
-          <h3 className="text-center text-blue-500 text-lg font-semibold mt-10">
-            You Have Not Placed Any Order Yet
-          </h3>
-        </>
-      )}
+ {
+  myOrders.length > 0 ?   <div>
+  {myOrders?.length < 1 && (
+       <>
+         <h3 className="text-center text-blue-500 text-lg font-semibold mt-10">
+           You Have Not Placed Any Order Yet
+         </h3>
+       </>
+     )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {myOrders?.map((order) => (
-          <MyOrderCard key={order._id} order={order} />
-        ))}
-      </div>
+     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+       {myOrders?.map((order) => (
+         <MyOrderCard key={order._id} order={order} />
+       ))}
+  </div>
+     </div>
+     : 
+     <p className="text-center text-sky-500 font-semibold text-2xl md:text-3xl">You Have Not Placed Any Order Yet</p>
+ }
+
     </div>
   );
 };
