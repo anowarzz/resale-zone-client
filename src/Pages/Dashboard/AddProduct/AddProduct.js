@@ -21,7 +21,7 @@ const navigate  = useNavigate();
 
 const handleAddProduct = (data, e) => {
 
-setLoading(true)
+
 
 
 
@@ -40,7 +40,7 @@ const totalUsedTime = thisYear - data?.purchaseYear
     formData.append("image", image);
 
   const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
-
+  setLoading(true)
   fetch(url, {
     method: "POST",
     body: formData,
@@ -281,7 +281,9 @@ if(loading){
               <span className="text-white">Year Of Purchase</span>
             </label>
             <input
-              {...register("purchaseYear")}
+              {...register("purchaseYear",{
+                required: "Purchase Year Is Required"
+              })}
          type="number" min="1900" max="2021" step="1"
               className="input input-bordered w-full font-semibold"
               placeholder="Year Of Purchase"

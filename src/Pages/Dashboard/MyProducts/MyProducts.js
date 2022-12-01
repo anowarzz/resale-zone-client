@@ -88,7 +88,8 @@ const MyProducts = () => {
         My All Products
       </h3>
 
-      <div className="overflow-x-auto">
+      {
+        myProducts.length > 0 ? <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
             <tr>
@@ -148,6 +149,9 @@ const MyProducts = () => {
           </tbody>
         </table>
       </div>
+: 
+<p className="text-center text-2xl font-semibold text-blue-500">You Have Not Added Any Product Yet</p>
+      }
 
       {deletingProduct && (
         <ConfirmationModal
