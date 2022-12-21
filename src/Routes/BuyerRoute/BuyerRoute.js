@@ -7,7 +7,7 @@ import useBuyer from "../../Hooks/useBuyer";
 const BuyerRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const [isBuyer, isBuyerLoading] = useBuyer(user?.email);
-  const location = useLocation();
+
 
   if (loading || isBuyerLoading) {
     return (
@@ -21,7 +21,7 @@ const BuyerRoute = ({ children }) => {
     return children;
   }
   return (
-    <Navigate to="/" state={{ from: location }} replace>
+    <Navigate to="/">
 
     </Navigate>
   );
