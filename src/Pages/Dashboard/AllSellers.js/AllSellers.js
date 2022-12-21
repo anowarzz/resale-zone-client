@@ -101,7 +101,7 @@ const AllSellers = () => {
         </thead>
         <tbody>
           {allSellers?.map((seller, i) => (
-            <tr key={seller._id}>
+            <tr key={seller?._id}>
               <th>{i + 1}</th>
               <td>{seller?.name}</td>
               <td>{seller?.email}</td>
