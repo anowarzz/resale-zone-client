@@ -2,8 +2,6 @@
 
 ## A Website where users can buy or sell their used laptops
 
-* adminEmail: anowar@admin.com
-* adminPassword: Admin@444
 
 ### Website Features And Functionalities
 * Users Can LogIn, Register Using Email Or Google Account.
