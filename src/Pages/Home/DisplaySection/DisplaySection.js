@@ -31,7 +31,7 @@ const DisplaySection = () => {
                 With Some Easy Steps
               </span>
             </h2>
-            <p className="text-base text-gray-700 md:text-lg font-serif">
+            <p className="text-base text-gray-700 md:text-lg">
               We have various type of pre-owned laptops of many popular brand .
               So just chose your favorite one and buy.
             </p>
