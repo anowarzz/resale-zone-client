@@ -8,7 +8,8 @@ module.exports = {
       Red: '#FF3811'
     },
     fontFamily: {
-      ubuntu: ['Ubuntu', 'sans-serif']
+      ubuntu: ['Ubuntu', 'sans-serif'],
+      poppins: ['Poppins', 'sans-serif']
     },
     extend: {},
   },

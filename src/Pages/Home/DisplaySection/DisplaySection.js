@@ -25,9 +25,9 @@ const DisplaySection = () => {
             </svg>
           </div>
           <div className="max-w-xl mb-6">
-            <h2 className="max-w-lg mb-6 font-sans text-2xl md:text-4xl font-bold tracking-tight text-gray-800 sm:text-4xl sm:leading-none">
+            <h2 className="max-w-lg mb-6 text-2xl md:text-4xl font-bold tracking-tight text-gray-800 sm:text-4xl sm:leading-none">
               Buy Or Sell Your Laptop
-              <span className="inline-block text-purple-600">
+              <span className="block text-blue-600 mt-3 font-bold">
                 With Some Easy Steps
               </span>
             </h2>
