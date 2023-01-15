@@ -7,6 +7,9 @@ module.exports = {
     colors: {
       Red: '#FF3811'
     },
+    fontFamily: {
+      ubuntu: ['Ubuntu', 'sans-serif']
+    },
     extend: {},
   },
   plugins: [require("daisyui")],

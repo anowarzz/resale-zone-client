@@ -5,8 +5,7 @@ import { AuthContext } from '../../contexts/AuthProvider';
 import { toast } from 'react-toastify';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
-
-
+import loginBG from '../../assets/cool-background.png'
 const googleProvider = new GoogleAuthProvider();
 
 const Login = () => {
@@ -165,7 +164,7 @@ if(loading){
 
 
   return (
-    <div className="flex flex-col justify-center items-center mb-4">
+    <div className="flex flex-col justify-center items-center bg-no-repeat bg-cover" style={{backgroundImage: `url(${loginBG})`}}>
       {
         loading && <Loading />
       }
