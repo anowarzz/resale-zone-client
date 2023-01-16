@@ -197,11 +197,10 @@ if(loading){
               placeholder="Enter Your Email"
             />
             {errors.email && (
-              <p className="text-sm font-bold text-red-500">
+              <p className="text-sm font-bold text-yellow-500">
                 {errors.email?.message}
               </p>
             )}
-          </div>
 
           <div className="form-control w-full max-w-xs">
             <label className="label">
@@ -225,13 +224,13 @@ if(loading){
               placeholder="Enter Your Password"
             />
             {errors.password && (
-              <p className="text-sm font-bold text-red-500">
+              <p className="text-sm font-bold text-yellow-500">
                 {errors.password?.message}
               </p>
             )}
           </div>
           {loginError && (
-            <p className="text-sm font-bold text-red-500 py-1">{loginError}</p>
+            <p className="text-sm font-bold text-yellow-400 py-1">{loginError}</p>
           )}
           <input
             className="btn bg-violet-600 w-full mt-4 hover:bg-blue-500"

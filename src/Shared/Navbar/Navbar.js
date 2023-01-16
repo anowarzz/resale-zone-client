@@ -3,6 +3,9 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import logo from "../../assets/cart-logo2.jpg";
 import useRole from "../../Hooks/useRole";
+import './Navbar.css'
+
+
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -17,11 +20,11 @@ const Navbar = () => {
 
   const menuItems = (
     <React.Fragment>
-      <li>
+      <li className="navitem">
         <NavLink
           to="/"
           className={({ isActive }) =>
-            isActive ? "text-primary font-bold" : "text-gray-800 font-semibold"
+            isActive ? "text-primary font-bold navbarMenu" : "text-gray-800 font-semibold"
           }
         >
           Home
@@ -93,7 +96,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar  py-6 px-4 bg-base-100 flex justify-between">
+    <div className="navbar  py-6 px-4 bg-base-100 flex justify-between dark:text-white">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -124,7 +127,7 @@ const Navbar = () => {
           className="btn btn-ghost hover:bg-transparent  normal-case text-2xl md:text-3xl"
         >
           <img src={logo} className="w-16" alt="" />
-          <p className="mx-1 md:mx-3 text-blue-400">
+          <p className="mx-1 pl-3 md:mx-3 text-blue-400">
             <span className="hover:text-yellow-500">R</span>
             <span className="hover:text-yellow-500">e</span>
             <span className="hover:text-yellow-500">s</span>
