@@ -197,7 +197,7 @@ if(loading){
 
 </div>
 
-    <div className="max-w-96 md:w-auto px-16 sm:py-4 col-span-3">
+    <div className="max-w-96 md:w-auto px-16 sm:py-4  pb-2 col-span-3">
       <h2 className="text-2xl text-blue-500 md:text-4xl text-center my-6">Login</h2>
 
 
