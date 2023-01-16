@@ -5,7 +5,10 @@ import { AuthContext } from '../../contexts/AuthProvider';
 import { toast } from 'react-toastify';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
-import loginBG from '../../assets/cool-background.png'
+import './Login.css'
+
+
+
 const googleProvider = new GoogleAuthProvider();
 
 const Login = () => {
@@ -164,18 +167,18 @@ if(loading){
 
 
   return (
-    <div className="flex flex-col justify-center items-center bg-no-repeat bg-cover" style={{backgroundImage: `url(${loginBG})`}}>
+    <div className="flex flex-col justify-center items-center login text-white">
       {
         loading && <Loading />
       }
-    <div className="max-w-96 md:w-auto px-16 py-4 border border-gray-200  shadow-slate-500 shadow-lg bg-slate-200">
-      <h2 className="text-2xl md:text-3xl text-center my-6">Login</h2>
+    <div className="max-w-96 md:w-auto px-16 py-4">
+      <h2 className="text-2xl text-blue-500 md:text-4xl text-center my-6">Login</h2>
 
 
       <form onSubmit={handleSubmit(handleLogin)}>
           <div className="form-control w-full max-w-xs">
             <label className="label">
-              <span className="label-text ">Email</span>
+              <span className="text-white ">Email</span>
             </label>
             <input
               {...register("email", {
@@ -194,7 +197,7 @@ if(loading){
 
           <div className="form-control w-full max-w-xs">
             <label className="label">
-              <span className="label-text ">Password</span>
+              <span className="text ">Password</span>
             </label>
             <input
               {...register("password", {

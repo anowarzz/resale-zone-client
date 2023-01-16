@@ -2,6 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import Loading from "../../../Shared/Loading/Loading";
 import AdvertizeCard from "./AdvertizeCard";
+import svg from '../../../assets/pattern-bg.png'
+
+
 
 const AdvertizedProducts = () => {
   const url = `https://resale-zone-server.vercel.app/advertisedProducts`;
@@ -33,6 +36,8 @@ const AdvertizedProducts = () => {
           <h3 className="text-4xl text-center font-bold mb-16 mx-auto">
             Advertized Products
           </h3>
+
+          <img src={svg} alt="" />
 
           <div className="grid grid-cols-1 md-grid-cols-2 lg:grid-cols-3">
             {advertisedProducts?.map((adProduct) => (

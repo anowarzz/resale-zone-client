@@ -5,6 +5,9 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import { toast } from "react-toastify";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Loading from "../../Shared/Loading/Loading";
+import registerBg from '../../assets/blue-bg.png'
+import './Register.css'
+
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -176,16 +179,16 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center my-4  bg-white">
-      <div className="max-w-96 md:w-auto px-16 py-4 border border-gray-200  shadow-slate-500 shadow-lg bg-slate-200">
-        <h2 className="text-2xl md:text-3xl text-center my-6">Register</h2>
+    <div className="flex flex-col justify-center items-center mt-4 register">
+      <div className="max-w-96 md:w-auto px-16 pb-4 shadow-slate-500 shadow-lg">
+        <h2 className="text-2xl text-blue-400 md:text-4xl text-center my-6">Register</h2>
 
         {loading && <Loading />}
 
         <form onSubmit={handleSubmit(handleRegister)}>
           <div className="form-control w-full max-w-xs">
             <label className="label">
-              <span className="label-text">Name</span>
+              <span className=" text-white">Name</span>
             </label>
             <input
               {...register("name", {
@@ -203,7 +206,7 @@ const Register = () => {
           </div>
           <div className="form-control w-full max-w-xs">
             <label className="label">
-              <span className="label-text">Email</span>
+              <span className=" text-white">Email</span>
             </label>
             <input
               {...register("email", {
@@ -222,7 +225,7 @@ const Register = () => {
 
           <div className="form-control w-full max-w-xs">
             <label className="label">
-              <span className="label-text">Account Type</span>
+              <span className=" text-white">Account Type</span>
             </label>
 
             <select
@@ -257,7 +260,7 @@ const Register = () => {
 
           <div className="form-control w-full max-w-xs">
             <label className="label">
-              <span className="label-text">Password</span>
+              <span className=" text-white">Password</span>
             </label>
             <input
               {...register("password", {
@@ -292,22 +295,22 @@ const Register = () => {
           />
         </form>
 
-        <p className="mt-4">
+        <p className="mt-4 text-white">
           Already have an account ?
           <Link
             to="/login"
-            className="text-primary font-semibold  pl-1 hover:link"
+            className="text-black font-semibold pl-2 hover:link hover:text-blue-400"
           >
             Login Now
           </Link>
         </p>
-        <div className="divider">OR</div>
+        <div className="divider text-white">OR</div>
 
         <button
           onClick={handleGoogleSignUp}
           aria-label="Login with Google"
           type="button"
-          className="flex items-center justify-center w-full p-2 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-600 focus:ring-violet-600 hover:bg-accent hover:text-white"
+          className="flex items-center text-gray-200 justify-center w-full p-2 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-blue-400 focus:ring-violet-600 hover:bg-accent hover:text-white"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
