@@ -3,15 +3,23 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../contexts/AuthProvider';
 import { toast } from 'react-toastify';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useFetcher, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
 import './Login.css'
+import { useEffect } from 'react';
 
 
 
 const googleProvider = new GoogleAuthProvider();
 
 const Login = () => {
+
+  useEffect(() => {
+window.scroll(0, 0,)
+
+
+  }, [])
+
 
 
 
@@ -185,7 +193,7 @@ if(loading){
                 required: "Email is required",
               })}
               type="email"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-black"
               placeholder="Enter Your Email"
             />
             {errors.email && (
@@ -213,7 +221,7 @@ if(loading){
                 },
               })}
               type="password"
-              className="input input-bordered w-full max-w-xs"
+              className="input input-bordered w-full max-w-xs text-black"
               placeholder="Enter Your Password"
             />
             {errors.password && (
@@ -246,7 +254,7 @@ if(loading){
         onClick={handleGoogleLogin}
         aria-label="Login with Google"
         type="button"
-        className="flex items-center text-gray-200 justify-center w-full p-2 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-50 focus:ring-violet-600 hover:bg-accent hover:text-white"
+        className="flex items-center text-gray-200 justify-center w-full p-2 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-50 focus:ring-violet-600 hover:bg-accent hover:text-white hover:border-transparent"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
