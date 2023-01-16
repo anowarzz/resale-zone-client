@@ -9,6 +9,9 @@ const Products = () => {
 
   const [bookingProduct, setBookingProduct] = useState(null);
 
+
+
+
   return (
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pb-20">
       <h2 className="mt-4 mb-10 text-2xl md:text-4xl font-semibold text-center">

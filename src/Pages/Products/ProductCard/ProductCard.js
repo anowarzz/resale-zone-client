@@ -5,16 +5,29 @@ import {
   faMarker,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { useEffect } from "react";
 import swal from "sweetalert";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import useAdmin from "../../../Hooks/useAdmin";
 import Loading from "../../../Shared/Loading/Loading";
 
+
 const ProductCard = ({ product, setBookingProduct }) => {
   const { user } = useContext(AuthContext);
 
   const [isAdmin, isAdminLoading] = useAdmin(user?.email);
+
+const [notLoggedInUser, setNotLoggedInUser] = useState(true)
+
+
+useEffect(() => {
+  if(user){
+    setNotLoggedInUser(false)
+  }
+},[user])
+
+
 
   const handleReportProduct = (id) => {
     console.log(id);
@@ -37,7 +50,7 @@ const ProductCard = ({ product, setBookingProduct }) => {
       });
   };
 
-  if (isAdminLoading) {
+  if  ( user?.uid && isAdminLoading) {
     return <Loading />;
   }
 
@@ -102,14 +115,29 @@ const ProductCard = ({ product, setBookingProduct }) => {
           </button>
         )}
 
+
+  {
+    user?.uid ?       <label
+    disabled={isAdmin}
+    onClick={() => setBookingProduct(product)}
+    htmlFor="booking-modal"
+    className="btn btn-success hover:btn-info mt-8"
+  >
+    Book Now
+  </label>
+  : 
         <label
-          disabled={isAdmin}
-          onClick={() => setBookingProduct(product)}
-          htmlFor="booking-modal"
-          className="btn btn-success hover:btn-info mt-8"
-        >
-          Book Now
-        </label>
+        disabled={notLoggedInUser}
+        onClick={() => setBookingProduct(product)}
+        htmlFor="booking-modal"
+        className="btn btn-success hover:btn-info mt-8"
+      >
+        Please Login to Book Product
+      </label>
+  }
+
+
+
       </div>
     </div>
   );

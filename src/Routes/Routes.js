@@ -46,12 +46,7 @@ const router = createBrowserRouter([
 
       {
         path: "/category/:id",
-        element: (
-          <PrivateRoute>
-            {" "}
-            <Products />{" "}
-          </PrivateRoute>
-        ),
+        element: <Products />,
         loader: async ({ params }) => {
           const res = await fetch(
             `https://resale-zone-server.vercel.app/categoryProducts?id=${params.id}`,
