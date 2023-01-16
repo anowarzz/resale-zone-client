@@ -235,7 +235,7 @@ if(loading){
         New to Resale Mart ?
         <Link
           to="/register"
-          className="text-primary font-semibold  pl-1 hover:link"
+          className="text-black font-semibold  pl-2 hover:link hover:text-blue-400"
         >
           Register Now
         </Link>
@@ -246,7 +246,7 @@ if(loading){
         onClick={handleGoogleLogin}
         aria-label="Login with Google"
         type="button"
-        className="flex items-center justify-center w-full p-2 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-600 focus:ring-violet-600 hover:bg-accent hover:text-white"
+        className="flex items-center text-gray-200 justify-center w-full p-2 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-50 focus:ring-violet-600 hover:bg-accent hover:text-white"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
