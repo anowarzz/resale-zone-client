@@ -31,6 +31,8 @@ const AdvertizedProducts = () => {
 
   return (
     <div >
+      { isLoading && <Loading/>
+  }
       {advertisedProducts.length > 0 && (
         <div className="advertise" >
           <h3 className="text-4xl text-yellow-400  pt-4 text-center font-bold mb-16 mx-auto">

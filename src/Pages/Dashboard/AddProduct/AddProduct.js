@@ -303,6 +303,7 @@ if(loading){
               type="file"
               className="input input-bordered w-full"
               placeholder="Upload a photo"
+              required
             />
             {/* {errors.image && (
               <p className="text-sm font-bold text-red-500">
