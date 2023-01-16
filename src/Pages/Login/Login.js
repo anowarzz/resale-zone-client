@@ -179,7 +179,25 @@ if(loading){
       {
         loading && <Loading />
       }
-    <div className="max-w-96 md:w-auto px-16 py-4">
+
+<div className='flex flex-col  justify-center sm:justify-between items-center sm:flex-row'>
+<div className='w-64 h-48 mt-8'>
+
+<div className='pl-3'>
+<h3 className='text-white text-2xl'><span className='text-blue-400'>Login</span> as a Buyer</h3>
+<p className=''><span className='text-white'>Email:</span> test@buyer.com</p>
+<p className=''><span className='text-white'>Password: </span>Buyer@1 </p>
+</div>
+
+<div className='mt-3 pl-3'>
+<h3 className='text-white text-2xl'><span className='text-blue-400'>Login</span>  as a Seller</h3>
+<p className=''><span className='text-white'>Email:</span> test@seller.com</p>
+<p className=''><span className='text-white'>Password: </span>Seller@2 </p>
+</div>
+
+</div>
+
+    <div className="max-w-96 md:w-auto px-16 sm:py-4 col-span-3">
       <h2 className="text-2xl text-blue-500 md:text-4xl text-center my-6">Login</h2>
 
 
@@ -201,6 +219,7 @@ if(loading){
                 {errors.email?.message}
               </p>
             )}
+          </div>
 
           <div className="form-control w-full max-w-xs">
             <label className="label">
@@ -265,6 +284,7 @@ if(loading){
         <p>Continue with Google</p>
       </button>
     </div>
+</div>
   </div>
   );
 };
