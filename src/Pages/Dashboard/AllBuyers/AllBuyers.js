@@ -33,6 +33,8 @@ const AllBuyers = () => {
     },
   });
 
+  console.log(allBuyers);
+  
   // Delete a product from database
   const handleDeleteBuyer = (buyer) => {
     const id = buyer._id;

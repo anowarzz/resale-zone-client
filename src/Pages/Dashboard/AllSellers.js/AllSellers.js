@@ -1,13 +1,16 @@
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ConfirmationModal from "../../../Shared/ConfirmationModal/ConfirmationModal";
 import Loading from "../../../Shared/Loading/Loading";
 import swal from "sweetalert";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 const AllSellers = () => {
+
+  const {loading} = useContext(AuthContext)
   const [deletingSeller, setDeletingSeller] = useState(null);
 
   const closeModal = () => {
@@ -72,8 +75,10 @@ const AllSellers = () => {
         }
       });
   };
+  console.log(allSellers);
+  
 
-  if (isLoading) {
+  if (loading || isLoading) {
     <Loading />;
   }
 
@@ -84,7 +89,10 @@ const AllSellers = () => {
       </h2>
       
       {
-        isLoading && <Loading />
+         loading && <Loading />
+      }
+      {
+         isLoading && <Loading />
       }
 
       
