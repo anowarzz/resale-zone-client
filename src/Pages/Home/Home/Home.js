@@ -11,8 +11,8 @@ const Home = () => {
       <HeroSection />
       <EasyDelivery />
       <AdvertizedProducts />
-      <DisplaySection />
       <ProductCategoryList />
+      <DisplaySection />
     </div>
   );
 };
