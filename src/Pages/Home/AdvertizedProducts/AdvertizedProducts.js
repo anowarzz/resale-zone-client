@@ -30,7 +30,7 @@ const AdvertizedProducts = () => {
   }
 
   return (
-    <div >
+    <div>
       { isLoading && <Loading/>
   }
       {advertisedProducts.length > 0 && (
