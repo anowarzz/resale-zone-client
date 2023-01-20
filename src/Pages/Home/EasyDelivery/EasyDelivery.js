@@ -13,7 +13,7 @@ const EasyDelivery = () => {
       
         <Marquee direction='right' speed={80} gradient={false} pauseOnHover={true}>
 
-        <h3 className='sm:text-xl md:text-2xl badge badge-info font-bold text-center py-2 md:py-4 ml-8 text-blue-500'>Getting A Laptop Became Easier </h3>
+        <h3 className='sm:text-xl md:text-2xl badge badge-info font-bold text-center py-2 sm:py-3 md:py-4 ml-8 text-gray-900'>Buying A Laptop Became Easier </h3>
         </Marquee>
     
              </div>
