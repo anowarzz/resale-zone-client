@@ -31,6 +31,7 @@ if(isRoleLoading){
 
     <h3 className="mt-2 text-2xl text-center"><span className="badge badge-info">Welcome {user?.displayName}</span></h3>
 
+      <p className="text-center text-sm md:text-base text-blue-600 font-semibold">Select option from  Menu bar</p>
 <div>
 <Outlet />
 </div>

@@ -184,13 +184,18 @@ if(loading){
 <div className='w-64 h-48 mt-8'>
 
 <div className='pl-3'>
-<h3 className='text-white text-2xl'><span className='text-blue-400'>Login</span> as a Buyer</h3>
+<h3 className='text-white md:text-xl'><span className='text-blue-400'>Login</span> as a Buyer</h3>
 <p className=''><span className='text-white'>Email:</span> test@buyer.com</p>
 <p className=''><span className='text-white'>Password: </span>Buyer@1 </p>
 </div>
+<div className='pl-3 mt-3'>
+<h3 className='text-white md:text-xl'><span className='text-blue-400'>Login</span> as Admin</h3>
+<p className=''><span className='text-white'>Email:</span> anowar@admin.com</p>
+<p className=''><span className='text-white'>Password: </span>Admin@444</p>
+</div>
 
 <div className='mt-3 pl-3'>
-<h3 className='text-white text-2xl'><span className='text-blue-400'>Login</span>  as a Seller</h3>
+<h3 className='text-white md:text-xl'><span className='text-blue-400'>Login</span>  as a Seller</h3>
 <p className=''><span className='text-white'>Email:</span> test@seller.com</p>
 <p className=''><span className='text-white'>Password: </span>Seller@2 </p>
 </div>
