@@ -2,10 +2,7 @@ import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 import useRole from "../Hooks/useRole";
-import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
-import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
-import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
-import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
+
 import Loading from "../Shared/Loading/Loading";
 import DashboardNavbar from "../Shared/Navbar/DashboardNavbar";
 

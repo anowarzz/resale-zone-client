@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 import BookingModal from "./BookingModal/BookingModal";
 import ProductCard from "./ProductCard/ProductCard";
 
 const Products = () => {
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+  
+
   const products = useLoaderData();
 
   const [bookingProduct, setBookingProduct] = useState(null);

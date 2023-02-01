@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const MyOrderCard = ({ order }) => {
   return (
-    <div className="flex flex-col  mx-auto p-6 space-y-4 sm:p-10 text-gray-50 bg-gray-800 max-w-xl">
+    <div className="flex flex-col  mx-auto p-6 space-y-4 sm:p-10 text-gray-50 bg-gray-800 w-96">
       <ul className="flex flex-col divide-y divide-gray-300">
         <div className="flex  w-full space-x-2 sm:space-x-4">
           <img
