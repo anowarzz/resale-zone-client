@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 
 const AdvertizeCard = ({ adProduct }) => {
   return (
-    <Link className="max-w-xs overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 my-10  mx-auto hover:bg-blue-600">
+    <Link 
+    to={`/advertised/${adProduct?._id}`}
+    className="max-w-xs overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 my-10  mx-auto hover:bg-blue-600">
       <div className="px-4 py-2">
         <h1 className="text-3xl font-bold text-gray-800 uppercase dark:text-white">
           {adProduct?.title}

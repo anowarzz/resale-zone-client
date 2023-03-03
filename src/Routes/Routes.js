@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
 import Main from "../layout/Main";
@@ -44,6 +45,15 @@ const router = createBrowserRouter([
         path: "/blog",
         element: <Blog />,
       },
+      // {
+      //   path: "/advertised/:id",
+      //   element: <AdvertizedProductDetails />,
+      //   loader: async ({params}) => {
+      //     const res = await fetch( `https://resale-zone-server.vercel.app/adProductDetails/${params.id}`)
+      //     const data = await res.json();
+      //     return data ;
+      //   }
+      // },
 
       {
         path: "/category/:id",

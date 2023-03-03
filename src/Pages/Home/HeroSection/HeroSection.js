@@ -12,7 +12,7 @@ const HeroSection = () => {
               <div>
                 <h1 className="text-2xl font-bold leading-none sm:text-6xl xl:max-w-3xl text-white font-poppins">
                   <span className="text-yellow-500">Buy or Sell</span> your used{" "}
-                  <span className="text-blue-400">laptops</span> easily !
+                  <span className="text-blue-400 inline-block mt-3">laptops</span> easily !
                 </h1>
                 <p className="mt-6 mb-8 text-lg sm:mb-12 xl:max-w-3xl text-white">
                   You can Buy your desired pre-owned laptops at your{" "}
